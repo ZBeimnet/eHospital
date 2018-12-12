@@ -23,7 +23,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- <a href="#" class="navbar-brand mr-auto"><img src="img/logo.png" class="mr-3" height="30" width="41"></a> -->
-        <img src="images/ylogo.png" width = "70px" height = "90px"   class="navbar-brand mr-auto">
+        <img src="images/ylogo.png" width = "50px" height = "70px"   class="navbar-brand mr-auto">
             <div class="collapse navbar-collapse" id="Navbar">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
@@ -151,10 +151,10 @@
             <div class="col-4 offset-1 col-sm-2">
                 <h5>Links</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="./aboutus.html">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Feedback</a></li>
+                    <li><a th:href="@{#}">Home</a></li>
+                    <li><a th:href="@{#}">About</a></li>
+                    <li><a th:href="@{#}">Contact</a></li>
+                    <li><a th:href="@{#}">Feedback</a></li>
                 </ul>
             </div>
             <div class="col-7 col-sm-5">
@@ -170,12 +170,12 @@
             </div>
             <div class="col-12 col-sm-4 align-self-center">
                 <div class="text-center">
-                    <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus fg-lg"></i></a>
-                    <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-facebook fg-lg"></i></a>
-                    <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin fg-lg"></i></a>
-                    <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter fg-lg"></i></a>
-                    <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fa fa-youtube fg-lg"></i></a>
-                    <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o fg-lg"></i></a>
+                    <a class="btn btn-social-icon btn-google" th:href="@{http://google.com/+}"><i class="fa fa-google-plus fg-lg"></i></a>
+                    <a class="btn btn-social-icon btn-facebook" th:href="@{http://www.facebook.com/profile.php?id=}"><i class="fa fa-facebook fg-lg"></i></a>
+                    <a class="btn btn-social-icon btn-linkedin" th:href="@{http://www.linkedin.com/in/}"><i class="fa fa-linkedin fg-lg"></i></a>
+                    <a class="btn btn-social-icon btn-twitter" th:href="@{http://twitter.com/}"><i class="fa fa-twitter fg-lg"></i></a>
+                    <a class="btn btn-social-icon btn-google" th:href="@{http://youtube.com/}"><i class="fa fa-youtube fg-lg"></i></a>
+                    <a class="btn btn-social-icon" th:href="@{mailto:}"><i class="fa fa-envelope-o fg-lg"></i></a>
                 </div>
             </div>
         </div>
