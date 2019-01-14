@@ -1,4 +1,4 @@
-package atech.webdivision.demo;
+package com.atech.yekatit_care;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

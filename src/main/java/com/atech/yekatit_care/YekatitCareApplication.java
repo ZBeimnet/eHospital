@@ -1,4 +1,4 @@
-package atech.webdivision.demo;
+package com.atech.yekatit_care;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

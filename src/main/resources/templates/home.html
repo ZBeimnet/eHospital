@@ -26,7 +26,7 @@
         <img src="images/ylogo.png" width = "50px" height = "70px"   class="navbar-brand mr-auto">
             <div class="collapse navbar-collapse" id="Navbar">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a th:href="@{#}" class="nav-link"><i class="fa fa-home fa-lg"></i> Home</a>
                     </li>
                     <li class="nav-item">
@@ -42,60 +42,15 @@
                 </ul>
                 <span class="navbar-text">
 
-                    <a id="loginLink">
+                    <a th:href="@{/login}">
                         <span class="fa fa-sign-in"></span> Login
                     </a>
                 </span>
             </div>
     </div>
 </nav>
-/////
 
-<div id="loginModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-md" role="content">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Login</h4>
-                <button type="button" class="close" data-dismiss="modal">
-                    &times;
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-row">
-                        <div class="form-group col-sm-6">
-                            <label class="sr-only" for="exampleInputEmail3">Email address</label>
-                            <input type="email" class="form-control form-control-sm mr-1" id="exampleInputEmail3" placeholder="Enter email">
-                        </div>
-                        <div class="form-group col-sm-6">
-                            <label class="sr-only" for="exampleInputPassword3">Password</label>
-                            <input type="password" class="form-control form-control-sm mr-1" id="exampleInputPassword3" placeholder="Password">
-                        </div>
-
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-sm-6">
-                            <label class="sr-only" for="selection">As:</label>
-                            <select class="form-control" id="selection">
-                                <option>Doctor</option>
-                                <option>Laboratory Technician</option>
-                                <option>Receptionist</option>
-                                <option>Admin</option>
-                            </select>
-                        </div>
-                        <div style="margin-left: 70px;">
-                            <button type="button" class="btn btn-secondary btn-md ml-auto" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary btn-md ml-1">Sign in</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<header class="jumbotron">
+    <header class="jumbotron">
     <div class="container">
         <div class="row row-header">
             <div class="col-12">
