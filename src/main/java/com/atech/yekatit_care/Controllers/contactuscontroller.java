@@ -7,16 +7,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class HomeController {
-
-    @GetMapping("/")
-    public String home() {
-        return "home";
-    }
-
-
-
-
-
-
+@RequestMapping("/contactus")
+public class contactuscontroller {
+@GetMapping
+    public String contact(){
+    return "contactus";
+}
 }
