@@ -27,10 +27,10 @@
         <div class="collapse navbar-collapse" id="Navbar">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a th:href="@{/home.html}" class="nav-link"><i class="fa fa-home fa-lg"></i> Home</a>
+                    <a th:href="@{/home}" class="nav-link"><i class="fa fa-home fa-lg"></i> Home</a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/aboutus.html}" class="nav-link"><span class="fa fa-info fa-lg"></span> About</a>
+                    <a th:href="@{/aboutus}" class="nav-link"><span class="fa fa-info fa-lg"></span> About</a>
                 </li>
                 <li class="nav-item">
                     <a th:href="@{#}" class="nav-link"><span class="fa fa-address-card fa-lg"></span> Contact Us</a>
@@ -79,7 +79,7 @@
                 <i class="fa fa-phone"></i>: +852 1234 5678<br>
                 <i class="fa fa-fax"></i>: +852 8765 4321<br>
                 <i class="fa fa-envelope"></i>:
-                <a href="mailto:confusion@food.net">confusion@food.net</a>
+                <a th:href="@{/mailto:contact@yekatit.net}">contact@yekatit.net</a>
             </address>
         </div>
         <div class="col-12 col-sm-6 offset-sm-1">
@@ -87,78 +87,14 @@
         </div>
         <div class="col-12 col-sm-11 offset-sm-1">
             <div class="btn-group" role="group">
-                <a role="button" class="btn btn-primary" th:href="@{/tel:85212345678}"><i class="fa fa-phone"></i> Call</a>
+                <a role="button" class="btn btn-primary" th:href="@{/tel:0925310203}"><i class="fa fa-phone"></i> Call</a>
                 <a role="button" class="btn btn-info"><i class="fa fa-skype"></i> Skype</a>
-                <a role="button" class="btn btn-success" href="mailto:confusion@food.net"><i class="fa fa-envelope-o"></i> Email</a>
+                <a role="button" class="btn btn-success" th:href="@{/mailto:contact@yekatit.net}"><i class="fa fa-envelope-o"></i> Email</a>
             </div>
         </div>
     </div>
 
-    <div class="row row-content">
-        <div class="col-12">
-            <h3>Send us your Feedback</h3>
-        </div>
-        <div class="col-12 col-md-9">
-            <form>
-                <div class="form-group row">
-                    <label for="firstname" class="col-md-2 col-form-label">Firstname</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Firstname">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="lastname" class="col-md-2 col-form-label">Lastname</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Lastname">
-                    </div>
 
-                </div>
-                <div class="form-group row">
-                    <label for="telnum" class="col-12 col-md-2 col-form-label">Contact Tel.</label>
-                    <div class="col-5 col-md-3">
-                        <input type="tel" class="form-control" name="areacode" id="areacode" placeholder="Area Code">
-                    </div>
-                    <div class="col-7 col-md-7">
-                        <input type="tel" class="form-control" name="telnum" id="telnum" placeholder="Tel. Number">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="email" class="col-md-2 col-form-label">Email</label>
-                    <div class="col-md-10">
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Email">
-                    </div>
-
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-6 offset-md-2">
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" name="approve" id="approve" value="">
-                            <label class="form-check-label" for="approve">May we contact you?</label>
-                        </div>
-                    </div>
-                    <div class="col-3 offset-md-1">
-                        <select class="form-control">
-                            <option>Tel.</option>
-                            <option>Email.</option>
-
-                        </select>
-                    </div>
-                    <div class="form-group row">
-                        <label for="feedback" class="col-md-3 col-form-label">Your Feedback</label>
-                        <div class="col-md-9">
-                        <textarea class="feedback" name="textarea" id="feedback" row="12">
-                        </textarea>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-9 offset-md-3">
-                                <button type="submit" class="btn btn-primary">Send Feedback</button>
-                            </div>
-                        </div>
-            </form>
-        </div>
-        <div class="col-12 col-md">
-        </div>
-    </div>
 
 </div>
 <footer class="footer">
@@ -167,8 +103,8 @@
             <div class="col-4 offset-1 col-sm-2">
                 <h5>Links</h5>
                 <ul class="list-unstyled">
-                    <li><a th:href="@{#}">Home</a></li>
-                    <li><a th:href="@{#}">About</a></li>
+                    <li><a th:href="@{home}">Home</a></li>
+                    <li><a th:href="@{about}">About</a></li>
                     <li><a th:href="@{#}">Contact</a></li>
                     <li><a th:href="@{#}">Feedback</a></li>
                 </ul>
@@ -210,4 +146,4 @@
 <script th:src="@{/js/scripts.js}"></script>
 
 </body>
-</html>
+</html>s
