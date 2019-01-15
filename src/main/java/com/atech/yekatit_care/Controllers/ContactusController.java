@@ -8,8 +8,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/contactus")
-public class contactuscontroller {
-@GetMapping
+public class ContactusController {
+
+    @GetMapping
     public String contact(){
     return "contactus";
 }
