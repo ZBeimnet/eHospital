@@ -57,7 +57,9 @@
                 </div>
                 <div class="col-sm-4">
                     <form th:action="@{/login}" method="POST" class="form-signin">
-                        <h3 class="form-signin-heading" th:text="Welcome"></h3>
+                        <div class="panel">
+                        <h2 class="form-signin-heading" th:text="Welcome"></h2>
+                        </div>
                         <br/>
 
                         <input type="text" id="email" name="email"  th:placeholder="Email"
