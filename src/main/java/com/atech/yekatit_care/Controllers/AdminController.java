@@ -27,4 +27,10 @@ public class AdminController {
         modelAndView.setViewName("admin/home");
         return modelAndView;
     }
+
+
+    @GetMapping("/EmployeeProfile")
+    public String profile() {
+        return "admin/EmployeeProfile";
+    }
 }

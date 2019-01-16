@@ -38,28 +38,26 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active  ">
-            <a class="nav-link" href="home">
+          <li class="nav-item active">
+            <a class="nav-link" th:href="@{/admin/home}">
               <i class="material-icons"></i>
               <p>Dashboard</p>
             </a>
+            </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="registration.html">
-
-            <a class="nav-link" href="registration">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/admin/registration}">
               <i class="material-icons"></i>
               <p>Employees' Registration</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="EmployeeProfile">
+            <a class="nav-link" th:href="@{/admin/EmployeeProfile}">
               <i class="material-icons"></i>
-              <p>Employees profile</p>
+              <p>Register Employees</p>
+            </a>
             </a>
           </li>
-             
-  
         </ul>
       </div>
     </div>

@@ -32,31 +32,30 @@
     -->
       <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-        YekatitCare
+          YekatitCare <br/>
+          Admin
         </a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item  ">
-            <a class="nav-link" th:href="@{home.html}">
+            <a class="nav-link" th:href="@{/admin/home}">
               <i class="material-icons"></i>
               <p>Dashboard</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" th:href="@{registration.html}">
+            <a class="nav-link" th:href="@{/admin/registration}">
               <i class="material-icons"></i>
               <p>Employees Registration</p>
             </a>
           </li>
-          <li class="nav-item ">
-            <a class="nav-link" th:href="@{EmployeeProfile.html}">
+          <li class="nav-item active">
+            <a class="nav-link" th:href="@{/admin/EmployeeProfile}">
               <i class="material-icons"></i>
               <p>Employees profile</p>
             </a>
           </li>
-        
-         
         </ul>
       </div>
     </div>
