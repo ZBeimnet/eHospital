@@ -70,10 +70,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/aboutus").permitAll()
                 .antMatchers("/contactus").permitAll().anyRequest()
 
-                .authenticated().and().csrf().disable().formLogin()
+                .authenticated().and().formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")
                 .successHandler(yekaAuthenticationSuccessHandler())
-//                .defaultSuccessUrl("/admin/home")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and().logout()
