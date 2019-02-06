@@ -10,6 +10,6 @@ public class LaboratoryTechnicianController {
 
     @GetMapping("/home")
     public String lab() {
-        return "Laboratory Technician/home";
+        return "LabTechnician/home";
     }
 }

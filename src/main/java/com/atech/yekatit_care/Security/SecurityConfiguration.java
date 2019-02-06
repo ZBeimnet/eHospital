@@ -2,13 +2,16 @@ package com.atech.yekatit_care.Security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
@@ -16,6 +19,13 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Bean("authenticationManager")
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -28,6 +38,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Value("${spring.queries.roles-query}")
     private String rolesQuery;
+
+    @Bean
+    public AuthenticationSuccessHandler yekaAuthenticationSuccessHandler(){
+        return new UrlAuthenticationSuccessHandler();
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
@@ -45,14 +60,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.
                 authorizeRequests()
+
+                .antMatchers("/doctor/**").hasAuthority("DOCTOR")
+                .antMatchers("/receptionist/**").hasAuthority("RECEPTIONIST")
+                .antMatchers("/lab/**").hasAuthority("LABORATORY_TECHNICIAN")
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/aboutus").permitAll()
-                .antMatchers("/contactus").permitAll()
-                .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
+                .antMatchers("/contactus").permitAll().anyRequest()
+
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")
-                .defaultSuccessUrl("/admin/home")
+                .successHandler(yekaAuthenticationSuccessHandler())
+//                .defaultSuccessUrl("/admin/home")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and().logout()
@@ -60,22 +81,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/").and().exceptionHandling()
                 .accessDeniedPage("/access-denied");
 
-//        http.
-//                authorizeRequests()
-//                .antMatchers("/").permitAll()
-//                .antMatchers("/login").permitAll()
-//                .antMatchers("/aboutus").permitAll()
-//                .antMatchers("/contactus").permitAll()
-//                .antMatchers("/labtechnician/**").hasAuthority("LABORATORY_TECHNICIAN").anyRequest()
-//                .authenticated().and().csrf().disable().formLogin()
-//                .loginPage("/login").failureUrl("/login?error=true")
-//                .defaultSuccessUrl("/labtechnician/home")
-//                .usernameParameter("email")
-//                .passwordParameter("password")
-//                .and().logout()
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                .logoutSuccessUrl("/").and().exceptionHandling()
-//                .accessDeniedPage("/access-denied");
     }
 
     @Override
