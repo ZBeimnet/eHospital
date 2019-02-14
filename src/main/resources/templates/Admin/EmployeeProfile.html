@@ -90,106 +90,26 @@
                   <div class="table-responsive">
                     <table class="table">
                       <thead class=" text-primary">
-                        <th>
-                          ID
-                        </th>
+
                         <th>
                           Name
                         </th>
                         <th>
-                          Country
+                          Email
                         </th>
                         <th>
-                          City
-                        </th>
-                        <th>
-                          Salary
+                          Profession
                         </th>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>
-                            1
+                        <tr th:each="user:${userList}">
+
+                          <td th:text="${user.name}">
                           </td>
-                          <td>
-                            Beimnet Zewdu
+                          <td th:text="${user.email}">
                           </td>
-                          <td>
-                            Ethiopia
-                          </td>
-                          <td>
-                            Asella
-                          </td>
-                          <td class="text-primary">
-                            $36,738
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            2
-                          </td>
-                          <td>
-                            Bethel Roger
-                          </td>
-                          <td>
-                            Ethiopia
-                          </td>
-                          <td>
-                            Dilla
-                          </td>
-                          <td class="text-primary">
-                            $23,789
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            3
-                          </td>
-                          <td>
-                            Bereket Heramo
-                          </td>
-                          <td>
-                            Ethiopia
-                          </td>
-                          <td>
-                            Durame
-                          </td>
-                          <td class="text-primary">
-                            $56,142
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            4
-                          </td>
-                          <td>
-                            Amir Mustefa
-                          </td>
-                          <td>
-                            Ethiopia
-                          </td>
-                          <td>
-                            Addis Ababa
-                          </td>
-                          <td class="text-primary">
-                            $38,735
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            5
-                          </td>
-                          <td>
-                            Beshir Dekebo
-                          </td>
-                          <td>
-                            Ethiopia
-                          </td>
-                          <td>
-                            Addis Ababa
-                          </td>
-                          <td class="text-primary">
-                            $63,542
+                          <td th:text="${user.selectedRole}">
+
                           </td>
                         </tr>
 

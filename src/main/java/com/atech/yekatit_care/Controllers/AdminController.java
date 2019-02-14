@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -30,7 +32,10 @@ public class AdminController {
 
 
     @GetMapping("/EmployeeProfile")
-    public String profile() {
+    public String profile(Map<String, Object>map) {
+        map.put("userList", userService.getAllUsers());
+
         return "admin/EmployeeProfile";
     }
+
 }
