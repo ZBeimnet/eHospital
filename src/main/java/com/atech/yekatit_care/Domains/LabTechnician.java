@@ -13,7 +13,6 @@ public class LabTechnician {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "labTechnician_id")
     private int labTechnician_id;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "labTechnician_user_id")
     private User userLabTechnician;
