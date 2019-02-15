@@ -26,13 +26,13 @@
         <div class="collapse navbar-collapse" id="Navbar">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a th:href="@{home}" class="nav-link"><i class="fa fa-home fa-lg"></i> Home</a>
+                    <a th:href="@{/}" class="nav-link"><i class="fa fa-home fa-lg"></i> Home</a>
                 </li>
                 <li class="nav-item">
                     <a th:href="@{#}" class="nav-link"><span class="fa fa-info fa-lg"></span> About</a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{contactus}" class="nav-link"><span class="fa fa-address-card fa-lg"></span> Contact Us</a>
+                    <a th:href="@{/contactus}" class="nav-link"><span class="fa fa-address-card fa-lg"></span> Contact Us</a>
                 </li>
                 <li class="nav-item">
                     <a th:href="@{#}" class="nav-link"><span class="fa fa-comments-o fa-lg"></span> Feedback</a>
@@ -57,13 +57,10 @@
 <div class="container">
     <div class="row">
         <ol class="col-12 breadcrumb">
-            <li class="bredcrumb-item"><a href="home.html">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/home.html}">Home</a></li>
             <li class="bredcrumb-item active">About Us</li>
         </ol>
         <div class="col-12">
-
-
-
             <h3>About Us</h3>
             <hr>
         </div>

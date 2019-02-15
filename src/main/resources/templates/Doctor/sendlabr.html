@@ -9,22 +9,24 @@
   <link rel="icon" type="image/png" th:href="@{/img/favicon.png}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Profile
+    YekatitCare
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" th:href="@{https://fonts.googleapis.com/css family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons}" />
+  <link rel="stylesheet" type="text/css" th:href="@{https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons}" />
   <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}">
   <!-- CSS Files -->
   <link th:href="@{/css/material-dashboard.css}" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link th:href="@{/demo/demo.css}" rel="stylesheet" />
-
+    <link th:href="@{/css/build.css}" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link rel="stylesheet" th:href="@{/demo/demo.css}" />
 </head>
 
 <body class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+      
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -32,30 +34,32 @@
     -->
       <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-          YekatitCare <br/>
-          Admin
+            YekatitCare <br/>
+            Doctor
         </a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item  ">
-            <a class="nav-link" th:href="@{/admin/home}">
+          <li class="nav-item active">
+            <a class="nav-link" href="../registration.html">
               <i class="material-icons"></i>
-              <p>Dashboard</p>
+              <p>Patients</p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" th:href="@{/admin/registration}">
+            <a class="nav-link" href="EmployeeProfile.html">
               <i class="material-icons"></i>
-              <p>Employees Registration</p>
+              <p>View Lab Requests</p>
             </a>
           </li>
-          <li class="nav-item active">
-            <a class="nav-link" th:href="@{/admin/EmployeeProfile}">
-              <i class="material-icons"></i>
-              <p>Employees profile</p>
-            </a>
-          </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="EmployeeProfile.html">
+                    <i class="material-icons"></i>
+                    <p>View Lab Results</p>
+                </a>
+            </li>
+
+
         </ul>
       </div>
     </div>
@@ -64,7 +68,11 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="#pablo">Employees' Profile</a>
+            <li class="nav-item active  ">
+              <a class="nav-link" href="home.html">
+                <p>Doctor</p>
+              </a>
+            </li>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -72,92 +80,99 @@
             <span class="navbar-toggler-icon icon-bar"></span>
             <span class="navbar-toggler-icon icon-bar"></span>
           </button>
-          <div class="collapse navbar-collapse justify-content-end">
-          </div>
+          <!-- <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#pablo">
+                  <i class="material-icons">dashboard</i>
+                  <p class="d-lg-none d-md-block">
+                    Stats
+                  </p>
+                </a>
+              </li>
+
+            </ul>
+          </div> -->
         </div>
       </nav>
       <!-- End Navbar -->
       <div class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Employees Profile</h4>
-                  <p class="card-category"> Profile</p>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead class=" text-primary">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-md-8">
+                      <div class="card">
+                          <div class="card-header card-header-primary">
+                              <h4 class="card-title">Lab Request Form</h4>
+                              <p class="card-category">Please Select Required Tests</p>
+                          </div>
+                          <div class="card-body">
+                              <form autocomplete="off" action="#" th:action="@{'/doctor/sendlabr/' + ${patient.id}}"
+                                    th:object="${labTest}" method="post" class="form-horizontal"
+                                    role="form">
+                                  <h2>Name: <span th:text="${patient.name}"></span> , Age: <span th:text="${patient.age}"></span> , Gender: <span th:text="${patient.gender}"></span></h2>
 
-                        <th>
-                          Name
-                        </th>
-                        <th>
-                          Email
-                        </th>
-                        <th>
-                          Profession
-                        </th>
-                      </thead>
-                      <tbody>
-                        <tr th:each="user:${userList}">
+                                  <div class="checkbox checkbox-success">
+                                      <input type="checkbox" id="checkbox1">
+                                      <label for="checkbox1"><span class="h3"><strong>Complete Blood Count</strong></span></label>
+                                  </div>
+                                  <div class="checkbox checkbox-success">
+                                      <input type="checkbox" id="checkbox2">
+                                      <label for="checkbox2"><span class="h3"><strong>Basic Metabolic Panel</strong></span></label>
+                                  </div>
+                                  <div class="checkbox checkbox-success">
+                                      <input type="checkbox" id="checkbox3">
+                                      <label for="checkbox3"><span class="h3"><strong>Urinalysis</strong></span></label>
+                                  </div>
+                                  <div class="checkbox checkbox-success">
+                                      <input type="checkbox" id="checkbox4">
+                                      <label for="checkbox4"><span class="h3"><strong>Cultures</strong></span></label>
+                                  </div>
+                                  <div class="checkbox checkbox-success">
+                                      <input type="checkbox" id="checkbox5">
+                                      <label for="checkbox5"><span class="h3"><strong>Prothrombin Time</strong></span></label>
+                                  </div>
+                                  <div class="checkbox checkbox-success">
+                                      <input type="checkbox" id="checkbox6">
+                                      <label for="checkbox6"><span class="h3"><strong>Comprehensive Metabolic Panel</strong></span></label>
+                                  </div>
+                                  <div class="checkbox checkbox-success">
+                                      <input type="checkbox" id="checkbox7">
+                                      <label for="checkbox7"><span class="h3"><strong>Lipid Panel</strong></span></label>
+                                  </div>
+                                  <div class="checkbox checkbox-success">
+                                      <input type="checkbox" id="checkbox8">
+                                      <label for="checkbox8"><span class="h3"><strong>Liver Panel</strong></span></label>
+                                  </div>
+                                  <div class="checkbox checkbox-success">
+                                      <input type="checkbox" id="checkbox10">
+                                      <label for="checkbox10"><span class="h3"><strong>Thyroid Stimulating Hormone</strong></span></label>
+                                  </div>
+                                  <div class="checkbox checkbox-success">
+                                      <input type="checkbox" id="checkbox11">
+                                      <label for="checkbox11"><span class="h3"><strong>Hemoglobin A1C</strong></span></label>
+                                  </div>
 
-                          <td th:text="${user.name}">
-                          </td>
-                          <td th:text="${user.email}">
-                          </td>
-                          <td th:text="${user.selectedRole}">
 
-                          </td>
-                        </tr>
+                                  <div class="form-group">
+                                      <div class="col-sm-9">
+                                          <button type="submit" class="btn btn-primary btn-block">Send Lab Request</button>
+                                      </div>
+                                  </div>
 
-                      </tbody>
-                    </table>
+                                  <!--<span th:utext="${successMessage}"></span>-->
+
+                              </form>
+                          </div>
+                      </div>
                   </div>
-                </div>
               </div>
-            </div>
-
           </div>
-        </div>
       </div>
-      <footer style="margin-top: 30px;" class="footer">
-        <div class="container-fluid">
-          <nav class="float-left">
-            <ul>
-              <li>
-                <a th:href="@{#}">
-                  Admin
-                </a>
-              </li>
-              <li>
-                <a th:href="@{#}">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a th:href="@{#}">
-                  Histories
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div class="copyright float-right">
-            &copy;
-            <script>
-              document.write(new Date().getFullYear())
-            </script>, made with <i class="material-icons">favorite</i> by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-          </div>
-        </div>
-      </footer>
     </div>
   </div>
   <div class="fixed-plugin">
     <div class="dropdown show-dropdown">
-      <a href="#" data-toggle="dropdown">
+      <a th:href="@{#}" data-toggle="dropdown">
         <i class="fa fa-cog fa-2x"> </i>
       </a>
       <ul class="dropdown-menu">
@@ -197,10 +212,23 @@
           </a>
         </li>
         <li class="button-container">
-
+          <a href="https://www.creative-tim.com/product/material-dashboard" target="_blank" class="btn btn-primary btn-block">Free Download</a>
         </li>
+        <!-- <li class="header-title">Want more components?</li>
+            <li class="button-container">
+                <a href="https://www.creative-tim.com/product/material-dashboard-pro" target="_blank" class="btn btn-warning btn-block">
+                  Get the pro version
+                </a>
+            </li> -->
         <li class="button-container">
+          <a href="https://demos.creative-tim.com/material-dashboard/docs/2.1/getting-started/introduction.html" target="_blank" class="btn btn-default btn-block">
+            View Documentation
+          </a>
         </li>
+        <li class="button-container github-star">
+          <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
+        </li>
+        <li class="header-title">Thank you for 95 shares!</li>
         <li class="button-container text-center">
           <button id="twitter" class="btn btn-round btn-twitter"><i class="fa fa-twitter"></i> &middot; 45</button>
           <button id="facebook" class="btn btn-round btn-facebook"><i class="fa fa-facebook-f"></i> &middot; 50</button>
@@ -422,6 +450,13 @@
 
         });
       });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+      // Javascript method's body can be found in assets/js/demos.js
+      md.initDashboardPageCharts();
+
     });
   </script>
 </body>

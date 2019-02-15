@@ -57,4 +57,5 @@ public class User {
 
     @OneToOne(mappedBy = "userReceptionist")
     private Receptionist receptionist;
+
 }

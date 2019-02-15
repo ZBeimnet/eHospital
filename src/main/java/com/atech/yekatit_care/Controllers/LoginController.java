@@ -13,11 +13,15 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
 
     @GetMapping
-    public ModelAndView login(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login");
-        return modelAndView;
+//    public ModelAndView login(){
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("login");
+//        return modelAndView;
+//    }
+    public String login() {
+        return "login";
     }
+
 
 
 

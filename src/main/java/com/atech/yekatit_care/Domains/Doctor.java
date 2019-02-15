@@ -18,4 +18,7 @@ public class Doctor {
     @JoinColumn(name = "doctor_user_id")
     private User userDoctor;
 
+
+
+
 }
