@@ -1,10 +1,69 @@
 <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Access Denied</title>
-    </head>
-    <body>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <title>Home</title>
+
+</head>
+<body>
+<nav class="navbar navbar-dark navbar-expand-md fixed-top">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- <a href="#" class="navbar-brand mr-auto"><img src="img/logo.png" class="mr-3" height="30" width="41"></a> -->
+        <img src="images/ylogo.png" width = "50px" height = "70px"   class="navbar-brand mr-auto">
+        <div class="collapse navbar-collapse" id="Navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a th:href="@{#}" class="nav-link"><i class="fa fa-home fa-lg"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{#}" class="nav-link"><span class="fa fa-info fa-lg"></span> About</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{#}" class="nav-link"><span class="fa fa-address-card fa-lg"></span> Contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{#}" class="nav-link"><span class="fa fa-comments-o fa-lg"></span> Feedback</a>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<header class="jumbotron">
+    <div class="container">
+        <div class="row row-header">
+            <div class="col-12">
+                <h1 style="text-align: center;">Yekatit Medical Care</h1>
+                <p><div class="50">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus accusamus quia fuga nulla. Ratione illo, omnis natus architecto voluptate sequi harum possimus quas itaque quisquam nostrum exercitationem soluta accusamus animi?</div></p>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="card">
+            <div class="card-header bg-primary">
+                <h1> Access denied</h1>
+            </div>
+                <div class="card-body">
+
+
+       <img th:src="@{images/acessdenied.jpg}">
+                </div>
+
+        </div>
         <h1>Error 401 Unauthorized!</h1>
     </body>
 </html>
