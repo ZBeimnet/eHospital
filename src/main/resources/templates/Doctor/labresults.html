@@ -15,11 +15,9 @@
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" th:href="@{https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons}" />
   <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}">
   <!-- CSS Files -->
   <link th:href="@{/css/material-dashboard.css}" rel="stylesheet" />
-    <link th:href="@{/css/build.css}" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
+  <!-- CSS Just for demo purpose, don't include it in your project -->
   <link rel="stylesheet" th:href="@{/demo/demo.css}" />
 </head>
 
@@ -40,19 +38,19 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" th:href="@{/doctor/home}">
               <i class="material-icons"></i>
-              <p>View Patients</p>
+              <p>Patients</p>
             </a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link" th:href="@{/doctor/sentrequests}">
               <i class="material-icons"></i>
-              <p>View Sent Lab Requests</p>
+              <p>View Lab Requests</p>
             </a>
           </li>
-            <li class="nav-item ">
+            <li class="nav-item active">
                 <a class="nav-link" th:href="@{/doctor/labresults}">
                     <i class="material-icons"></i>
                     <p>View Lab Results</p>
@@ -64,46 +62,8 @@
       </div>
     </div>
     <div class="main-panel">
-
       <div class="content">
-          <div class="container-fluid">
-              <div class="row">
-                  <div class="col-md-8">
-                      <div class="card">
-                          <div class="card-header card-header-primary">
-                              <h4 class="card-title">Lab Request Form</h4>
-                              <p class="card-category">Please Select Required Tests</p>
-                          </div>
-                          <div class="card-body">
-                              <form autocomplete="off" action="#" th:action="@{'/doctor/sendlabr/' + ${patient.id}}"
-                                    th:object="${labTest}" method="post" class="form-horizontal"
-                                    role="form">
-                                  <span class="text-danger"
-                                        th:if="${#fields.hasErrors('lab_request')}"
-                                        th:errors="*{lab_request}">Lab Request Error</span>
-                                  <h2>Name: <span th:text="${patient.name}"></span> , Age: <span th:text="${patient.age}"></span> , Gender: <span th:text="${patient.gender}"></span></h2>
 
-                                  <div class="checkbox checkbox-success" th:each="test: ${tests}">
-                                      <input name="lab_request" type="checkbox" th:value="${test.id}" th:id="${test.id}" >
-                                      <label th:for="${test.id}"><span class="h3"><strong th:text="${test.name}"></strong></span></label>
-                                  </div>
-                                  <!--<input name="patient_id" type="hidden" th:field="*{patient_id}" th:value="${patient.id}"  >-->
-
-                                  <div class="form-group">
-                                      <div class="col-sm-9">
-                                          <button type="submit" class="btn btn-primary btn-block">Send Lab Request</button>
-                                      </div>
-                                  </div>
-
-                                  <!--<span th:utext="${successMessage}"></span>-->
-
-                              </form>
-
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
       </div>
     </div>
   </div>
@@ -176,9 +136,7 @@
     </div>
   </div>
   <!--   Core JS Files   -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-
-    <script src="../assets/js/core/jquery.min.js"></script>
+  <script src="../assets/js/core/jquery.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
@@ -398,22 +356,6 @@
 
     });
   </script>
-    <script>
-
-
-            // $("[type=checkbox]").change(function() {
-            //
-            //     var msg = "";
-            //
-            //     $('input:checked').each(function(i,v){
-            //         msg += $(v).val() + " , ";
-            //     });
-
-
-
-            // });
-
-    </script>
 </body>
 
 </html>
