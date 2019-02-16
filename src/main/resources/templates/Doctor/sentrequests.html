@@ -41,7 +41,7 @@
           <li class="nav-item">
             <a class="nav-link" th:href="@{/doctor/home}">
               <i class="material-icons"></i>
-              <p>Patients</p>
+              <p>View Patients</p>
             </a>
           </li>
           <li class="nav-item active">
@@ -67,6 +67,24 @@
     </div>
     <div class="main-panel">
       <div class="content">
+
+          <div class="row">
+              <div class="card col-sm-5 mr-1 ml-5" style="width:250px;" th:each="labTest : ${labTests}">
+                  <!--<img class="card-img-top img-fluid" style="height: 300px;" th:src="@{/images/card.png}" alt="Card image">-->
+                  <div class="card-body">
+                      <h4 class="card-title">Patient Name: <span th:text="${patientNames.get(labTest.patient_id)}" class="h4 badge badge-secondary"></span></h4>
+                      <h4 class="card-title">Assigned Doctor: Dr. <span th:text="${doctor.getName()}" class="h4 badge badge-secondary"></span></h4>
+                      <h4><span style="alignment: center;" class="h4 badge badge-primary">Requested Lab Tests   <i class="fa fa-arrow-down"></i></span></h4>
+
+                      <div class="card">
+                          <ul class="list-group list-group-flush">
+                              <li class="list-group-item" th:each="test : ${labTest.getLab_request()}" th:text="${test.getName()}"></li>
+                          </ul>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
 
       </div>
     </div>
