@@ -3,8 +3,11 @@ import com.atech.yekatit_care.Domains.Role;
 import com.atech.yekatit_care.Domains.User;
 import com.atech.yekatit_care.Repositories.RoleRepository;
 import com.atech.yekatit_care.Repositories.UserRepository;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Arrays;
@@ -18,6 +21,7 @@ public class UserService {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private SessionFactory sessionFactory;
 
     @Autowired
     public UserService(@Qualifier("userRepository") UserRepository userRepository,
@@ -32,6 +36,9 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
     public List<User> getAllUsers(){ return userRepository.findAllByOrderByName(); }
+    public void deleteUser(int id){
+        userRepository.deleteById(id);
+    }
 
     public void saveUser(User user, String role) {
         user.setPassword((bCryptPasswordEncoder.encode(user.getPassword())));
@@ -41,4 +48,12 @@ public class UserService {
         userRepository.save(user);
 
     }
+    public void updateUser(int id){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User ur =userRepository.getOne(id);
+        userRepository.save(ur);
+
+
+    }
+
 }

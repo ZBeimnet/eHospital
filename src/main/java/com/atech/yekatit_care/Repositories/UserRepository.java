@@ -11,6 +11,8 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Integer> {
     User findByEmail(String email);
     public List<User> findAllByOrderByName();
+    public void deleteUserByEmail(String email);
+    public void deleteUserById(int id);
 
 }
 

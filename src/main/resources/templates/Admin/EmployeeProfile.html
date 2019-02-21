@@ -100,16 +100,25 @@
                         <th>
                           Profession
                         </th>
+                      <th>
+                        Action
+                      </th>
                       </thead>
                       <tbody>
-                        <tr th:each="user:${userList}">
-
+                        <tr id="myTableRow" th:each="user:${userList}">
                           <td th:text="${user.name}">
+                          </td>
+                          <td th:text="${user.lastName}">
                           </td>
                           <td th:text="${user.email}">
                           </td>
                           <td th:text="${user.selectedRole}">
-
+                          </td>
+                          <td>
+                              <a href="#" th:href="@{'/admin/EmployeeProfile/' + ${user.id}}"  class="btn btn-danger">Delete</a>
+                          </td>
+                          <td>
+                            <a  th:href="@{/admin/edit/}" class="btn btn-info">Edit</a>
                           </td>
                         </tr>
 
@@ -285,6 +294,23 @@
             }
           }
         });
+          function removeUser(deleteURL) {
+
+              $.ajax({
+
+                  type: "DELETE",
+                  url: deleteURL,
+
+                  success: function () {
+                      // window.location.reload();
+                      $('#myTableRow').remove();
+                  },
+
+                  failure: function (errMsg) {
+                      console.log(errMsg.toString())
+                  }
+              });
+          }
 
         $('.fixed-plugin .active-color span').click(function() {
           $full_page_background = $('.full-page-background');

@@ -2,14 +2,18 @@ package com.atech.yekatit_care.Controllers;
 
 import com.atech.yekatit_care.Domains.User;
 import com.atech.yekatit_care.Services.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.persistence.Id;
+import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
@@ -34,8 +38,19 @@ public class AdminController {
     @GetMapping("/EmployeeProfile")
     public String profile(Map<String, Object>map) {
         map.put("userList", userService.getAllUsers());
-
         return "admin/EmployeeProfile";
     }
 
-}
+
+    @GetMapping("/EmployeeProfile/{id}")
+    public ModelAndView delete(@PathVariable int id){
+        ModelAndView modelAndView=new ModelAndView();
+        userService.deleteUser(id);
+        modelAndView.setViewName("admin/EmployeeProfile");
+        return modelAndView;
+    }
+
+
+    }
+
+
