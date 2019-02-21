@@ -32,71 +32,57 @@
     -->
       <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-          YekatitCare
+            YekatitCare <br/>
+            Laboratory Technician
         </a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item   ">
-            <a class="nav-link" href="home.html">
-
-              <p> laboratory technician</p>
-            </a>
-          </li>
           <li class="nav-item active">
             <a class="nav-link" href="../registration.html">
               <i class="material-icons">person</i>
-              <p>View Patients report</p>
+              <p>View Lab Requests</p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="EmployeeProfile.html">
               <i class="material-icons">content_paste</i>
-              <p>perform laboratory tests</p>
+              <p>Perform Labratory Test</p>
             </a>
           </li>
-             
-  
+            <li class="nav-item">
+                <a style="width: 90%;" class="btn btn-warning" th:href="@{/logout}">
+                    <p>Log out</p>
+                </a>
+            </li>
         </ul>
       </div>
     </div>
     <div class="main-panel">
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-        <div class="container-fluid">
-          <div class="navbar-wrapper">
-            <li class="nav-item active  ">
-              <a class="nav-link" href="home.html">
+       <div class="content">
 
-                <p>Laboratory Technician</p>
-              </a>
-            </li>
-          </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-          </button>
-          <!-- <div class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="#pablo">
-                  <i class="material-icons">dashboard</i>
-                  <p class="d-lg-none d-md-block">
-                    Stats
-                  </p>
-                </a>
-              </li>
+           <div class="row">
+               <div class="card col-sm-5 mr-1 ml-5" style="width:250px;" th:each="labTest : ${labTests}">
+                   <!--<img class="card-img-top img-fluid" style="height: 300px;" th:src="@{/images/card.png}" alt="Card image">-->
+                   <div class="card-body">
+                       <h4 class="card-title">Patient Name: <span th:text="${patientNames.get(labTest.patient_id)}" class="h4 badge badge-secondary"></span></h4>
+                       <h4 class="card-title">Assigned Doctor: Dr. <span th:text="${doctorNames.get(labTest.getDoctor_email())}" class="h4 badge badge-secondary"></span></h4>
+                       <h4><span style="alignment: center;" class="h4 badge badge-primary">Requested Lab Tests   <i class="fa fa-arrow-down"></i></span></h4>
 
-            </ul>
-          </div> -->
-        </div>
-      </nav>
-      <!-- End Navbar -->
-      <div class="content">
+                       <div class="card">
+                           <ul class="list-group list-group-flush">
+                               <li class="list-group-item" th:each="test : ${labTest.getLab_request()}" th:text="${test.getName()}"></li>
+                           </ul>
+                       </div>
 
+                   </div>
+                   <div class="card-footer">
+                       <a class="btn btn-primary" href="#">Send Lab Result</a>
+                   </div>
+               </div>
+           </div>
 
+       </div>
     </div>
   </div>
   <div class="fixed-plugin">
@@ -388,6 +374,7 @@
 
     });
   </script>
+
 </body>
 
 </html>

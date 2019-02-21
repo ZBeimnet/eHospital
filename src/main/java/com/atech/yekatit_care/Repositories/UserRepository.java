@@ -10,6 +10,7 @@ import java.util.List;
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, Integer> {
     User findByEmail(String email);
+    User findByName(String name);
     public List<User> findAllByOrderByName();
     public void deleteUserByEmail(String email);
     public void deleteUserById(int id);

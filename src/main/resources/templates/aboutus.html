@@ -57,13 +57,10 @@
 <div class="container">
     <div class="row">
         <ol class="col-12 breadcrumb">
-            <li class="bredcrumb-item"><a href="home.html">Home</a></li>
+            <li class="breadcrumb-item"><a th:href="@{/home.html}">Home</a></li>
             <li class="bredcrumb-item active">About Us</li>
         </ol>
         <div class="col-12">
-
-
-
             <h3>About Us</h3>
             <hr>
         </div>
@@ -133,40 +130,41 @@
             <div class="col-4 offset-1 col-sm-2">
                 <h5>Links</h5>
                 <ul class="list-unstyled">
-                    <li><a th:href="@{/home}">Home</a></li>
-                    <li><a th:href="@{/#}">About</a></li>
-
-                    <li><a th:href="@{/contactus}">Contact</a></li>
+                    <li><a th:href="@{home}">Home</a></li>
+                    <li><a th:href="@{#}">About</a></li>
+                    <li><a th:href="@{contactus}">Contact</a></li>
+                    <li><a th:href="@{#}">Feedback</a></li>
                 </ul>
             </div>
             <div class="col-7 col-sm-5">
                 <h5>Our Address</h5>
-                <address>
-                    121, Clear Water Bay Road<br>
-                    Clear Water Bay, Kowloon<br>
-                    HONG KONG<br>
-                    <i class="fa fa-phone"></i> +852 1234 5678<br>
-                    <i class="fa fa-fax"></i>+852 8765 4321<br>
-                    <i class="fa fa-envelope"></i><a th:href="@{/mailto:confusion@food.net}">confusion@food.net</a>
+                <address class="address">
+                    St George's Square<br>
+                    6 Kilo, Addis Ababa<br>
+                    Ethiopia<br>
+                    <i class="fa fa-phone fa-lg"></i>: +251910765922<br>
+                    <i class="fa fa-fax fa-lg"></i>: +25125310203<br>
+                    <i class="fa fa-envelope fa-lg"></i>: <a href="mailto:contact@yekatit.net">contact@yekatit.net</a>
                 </address>
             </div>
             <div class="col-12 col-sm-4 align-self-center">
                 <div class="text-center">
-                    <a class="btn btn-social-icon btn-google" th:href="@{/http://google.com/+}"><i class="fa fa-google-plus fa-lg"></i></a>
-                    <a class="btn btn-social-icon btn-facebook" th:href="@{/http://www.facebook.com/profile.php?id=}"><i class="fa fa-facebook  fa-lg"></i></a>
-                    <a class="btn btn-social-icon btn-linkedin" th:href="@{/http://www.linkedin.com/in/}"><i class="fa fa-linkedin fa-lg"></i></a>
-                    <a class="btn btn-social-icon btn-twitter" th:href="@{/http://twitter.com/}"><i class="fa fa-twitter fa-lg"></i></a>
-                    <a class="btn btn-social-icon btn-google" th:href="@{/http://youtube.com/}"><i class="fa fa-youtube fa-lg"></i></a>
-                    <a class="btn btn-social-icon btn-envelope" th:href="@{/mailto:}"><i class="fa fa-envelope-o fa-lg"></i></a>
+                    <a class="btn btn-social-icon btn-google" th:href="@{http://google.com/+}"><i class="fa fa-google-plus fg-lg"></i></a>
+                    <a class="btn btn-social-icon btn-facebook" th:href="@{http://www.facebook.com/profile.php?id=}"><i class="fa fa-facebook fg-lg"></i></a>
+                    <a class="btn btn-social-icon btn-linkedin" th:href="@{http://www.linkedin.com/in/}"><i class="fa fa-linkedin fg-lg"></i></a>
+                    <a class="btn btn-social-icon btn-twitter" th:href="@{http://twitter.com/}"><i class="fa fa-twitter fg-lg"></i></a>
+                    <a class="btn btn-social-icon btn-google" th:href="@{http://youtube.com/}"><i class="fa fa-youtube fg-lg"></i></a>
+                    <a class="btn btn-social-icon" th:href="@{mailto:}"><i class="fa fa-envelope-o fg-lg"></i></a>
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-auto">
-                <p>© Copyright 2018 Ristorante Con Fusion</p>
+                <p>Copyright © 2018 Yekatit Referral Hospital</p>
             </div>
         </div>
     </div>
+
 </footer>
 <script th:src="@{/js/jquery.slim.min.js}"></script>
 <script th:src="@{/js/popper.min.js}"></script>

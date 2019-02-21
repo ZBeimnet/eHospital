@@ -6,6 +6,8 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,18 +19,18 @@ public class LabTest {
     @Column(name = "test_id")
     private int test_id;
 
-    @ManyToOne
-    @JoinColumn(name = "patient_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Patient patient;
+//    @ManyToOne
+//    @JoinColumn(name = "patient_id", nullable = false)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+    private int patient_id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id", nullable = false)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+    private String doctor_email;
 
-    @Column(name = "lab_request")
-    @NotEmpty(message = "*Please provide your lab requests")
-    private String lab_request;
+    @ManyToMany(targetEntity=Test.class)
+    @Size(min=1, message="You must select at least 1 lab test")
+    private List<Test> lab_request;
 
 }
