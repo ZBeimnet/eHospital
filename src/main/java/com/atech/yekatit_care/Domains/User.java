@@ -46,16 +46,6 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    @OneToOne(mappedBy = "userDoctor")
-    private Doctor doctor;
 
-    @OneToOne(mappedBy = "userAdmin")
-    private Admin admin;
-
-    @OneToOne(mappedBy = "userLabTechnician")
-    private LabTechnician labTechnician;
-
-    @OneToOne(mappedBy = "userReceptionist")
-    private Receptionist receptionist;
 
 }

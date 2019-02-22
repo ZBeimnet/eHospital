@@ -98,6 +98,40 @@ public class DoctorController {
         return "Doctor/sendlabr";
     }
 
+    @GetMapping("/sentrequests/edit/{id}")
+    public String editLabRequest(@PathVariable int id, Model model) {
+
+        Patient patient = patientRepository.findById(id);
+        Iterable<Test> tests = testRepository.findAll();
+
+        model.addAttribute("tests", tests);
+        model.addAttribute("patient", patient);
+        model.addAttribute("labTest", new LabTest());
+
+        return "Doctor/editsentrequests";
+    }
+
+    @PostMapping("/sentrequests/edit/{id}")
+    public String processEditedLapReqest(@Valid LabTest labTest, Errors errors, @PathVariable int id, Principal principal){
+        if (errors.hasErrors()) {
+            return "Doctor/editsentrequests";
+        }
+
+//        patientRepository.deleteById(id);
+//        int testId = labTest.getTest_id();
+        List<Test> lab_requests = labTest.getLab_request();
+
+        LabTest labTestToBeSaved = labTestRepository.findByPatient_id(id);
+
+        labTestToBeSaved.setLab_request(lab_requests);
+        labTestToBeSaved.setPatient_id(id);
+        labTestToBeSaved.setDoctor_email(principal.getName());
+
+        labTestRepository.save(labTestToBeSaved);
+
+        return "redirect:/doctor/sentrequests";
+    }
+
     @PostMapping("/sendlabr/{id}")
     public String processLabRequest(@Valid LabTest labTest, Errors errors, @PathVariable int id, Principal principal) {
 
@@ -116,7 +150,6 @@ public class DoctorController {
         labTestToBeSaved.setDoctor_email(principal.getName());
 
         labTestRepository.save(labTestToBeSaved);
-
 
         return "redirect:/doctor/home";
     }

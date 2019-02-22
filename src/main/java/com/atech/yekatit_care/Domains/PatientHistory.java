@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.Date;
 
 @Data
 @Entity
@@ -25,4 +26,13 @@ public class PatientHistory {
 
     @OneToOne(mappedBy = "patientHistory")
     private Patient patient;
+
+    @Column(name = "history_saved_date")
+    private Date historySavedDate;
+
+    @PrePersist
+    void historySavedDate() {
+        this.historySavedDate = new Date();
+    }
+
 }
