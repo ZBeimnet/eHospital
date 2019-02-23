@@ -24,6 +24,5 @@ public class LabResult {
     private String labTechnician_name;
 
     @ManyToMany(targetEntity=Result.class)
-    @Size(min=1, message="You must select at least 1 lab test")
     private List<Result> lab_result;
 }

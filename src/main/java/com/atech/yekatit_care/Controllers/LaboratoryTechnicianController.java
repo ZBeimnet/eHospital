@@ -3,21 +3,21 @@ package com.atech.yekatit_care.Controllers;
 import com.atech.yekatit_care.Domains.*;
 import com.atech.yekatit_care.Repositories.*;
 import com.atech.yekatit_care.Services.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 @Controller
+@Slf4j
 @RequestMapping("/laboratory")
 public class LaboratoryTechnicianController {
 
@@ -73,18 +73,27 @@ public class LaboratoryTechnicianController {
         model.addAttribute("testRequests", tests);
         model.addAttribute("testRequestId", testRequestId);
         model.addAttribute("labResult", new LabResult());
-
+        model.addAttribute("result", new ResultWrapper());
         return "LabTechnician/sendlabresult";
     }
 
     @PostMapping("/sendlabresult/{testRequestId}")
-    public String processLabRequest(@Valid LabResult labResult, Errors errors, @PathVariable int testRequestId, Principal principal) {
+    public String processLabRequest(@ModelAttribute ResultWrapper labResult, Errors errors, @PathVariable int testRequestId, Principal principal) {
 
         if (errors.hasErrors()) {
             return "LabTechnician/sendlabresult";
         }
 
-        List<Result> lab_results = labResult.getLab_result();
+        List<Result> lab_results = new ArrayList<>();
+
+        for (String result:
+             labResult.getResults()) {
+            Result r = new Result();
+            r.setResult(result);
+
+            lab_results.add(r);
+        }
+
         for (Result lab_result:
              lab_results) {
             resultRepository.save(lab_result);

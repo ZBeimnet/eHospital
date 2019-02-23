@@ -81,16 +81,16 @@
                           <div class="card-body">
 
                               <form autocomplete="off" action="#" th:action="@{'/laboratory/sendlabresult/' + ${testRequestId}}"
-                                    th:object="${labResult}" method="post" class="form-horizontal"
+                                    th:object="${result}" method="post" class="form-horizontal"
                                     role="form">
                                   <h2>Lab Results</h2>
-                                  <span class="text-danger"
-                                        th:if="${#fields.hasErrors('lab_result')}"
-                                        th:errors="*{lab_result}">Lab Request Error</span>
+                                  <!--<span class="text-danger"-->
+                                        <!--th:if="${#fields.hasErrors('lab_result')}"-->
+                                        <!--th:errors="*{lab_result}">Lab Request Error</span>-->
 
                                   <div th:each="test: ${testRequests}">
                                       <!--<label th:for="${test.id}"><span class="h3"><strong th:text="${test.name}"></strong></span></label>-->
-                                      <input class="form-control" th:placeholder="${test.name}" name="lab_result" type="text" th:id="${test.id}" >
+                                      <input class="form-control" th:placeholder="${test.name}" name="results" type="text" th:id="${test.id}" >
                                   </div>
 
                                   <div class="form-group">
