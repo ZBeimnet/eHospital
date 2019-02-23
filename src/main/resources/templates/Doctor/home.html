@@ -77,8 +77,13 @@
                   <p class="card-text"><span class="badge badge-secondary">Gender:</span> <span th:text="${patient.gender}"></span></p>
                   <p class="card-text"><span class="badge badge-secondary">Phone No:</span> <span th:text="${patient.phone_no}"></span></p>
               </div>
-              <div class="card-footer">
-                  <a class="btn btn-primary" th:href="@{'/doctor/sendlabr/' + ${patient.id}}">Send Lab Request</a>
+              <div class="card-footer row">
+                  <div class="col-md-6">
+                      <a class="btn btn-primary" th:href="@{'/doctor/sendlabr/' + ${patient.id}}">Send Lab Request</a>
+                  </div>
+                  <div class="col-md-6">
+                      <a class="btn btn-primary" href="#">Save Patient History</a>
+                  </div>
               </div>
           </div>
         </div>

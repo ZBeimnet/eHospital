@@ -79,7 +79,7 @@
                                             <p class="card-category">Please Select Required Tests</p>
                                         </div>
                                         <div class="card-body">
-                                            <form autocomplete="off" action="#" th:action="@{'/doctor/sentrequests/edit/' + ${patient.id}}"
+                                            <form autocomplete="off" action="#" th:action="@{'/doctor/sentrequests/edit/' + ${test_id}}"
                                                   th:object="${labTest}" method="post" class="form-horizontal"
                                                   role="form">
                                   <span class="text-danger"

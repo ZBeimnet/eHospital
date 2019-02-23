@@ -15,4 +15,7 @@ public interface LabTestRepository extends CrudRepository<LabTest, Integer > {
     @Query("SELECT lt FROM LabTest lt WHERE lt.patient_id = ?1")
     LabTest findByPatient_id(int id);
 
+    @Query("SELECT lt FROM LabTest lt WHERE lt.test_id = ?1")
+    LabTest findByTest_id(int id);
+
 }

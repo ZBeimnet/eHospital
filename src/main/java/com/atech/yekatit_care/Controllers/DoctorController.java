@@ -15,10 +15,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -98,8 +95,8 @@ public class DoctorController {
         return "Doctor/sendlabr";
     }
 
-    @GetMapping("/sentrequests/edit/{id}")
-    public String editLabRequest(@PathVariable int id, Model model) {
+    @GetMapping("/sentrequests/edit/{id}/{test_id}")
+    public String editLabRequest(@PathVariable int id, @PathVariable int test_id, Model model) {
 
         Patient patient = patientRepository.findById(id);
         Iterable<Test> tests = testRepository.findAll();
@@ -107,12 +104,13 @@ public class DoctorController {
         model.addAttribute("tests", tests);
         model.addAttribute("patient", patient);
         model.addAttribute("labTest", new LabTest());
+        model.addAttribute("test_id", test_id);
 
         return "Doctor/editsentrequests";
     }
 
-    @PostMapping("/sentrequests/edit/{id}")
-    public String processEditedLapReqest(@Valid LabTest labTest, Errors errors, @PathVariable int id, Principal principal){
+    @PostMapping("/sentrequests/edit/{test_id}")
+    public String processEditedLapReqest(@Valid LabTest labTest, Errors errors, @PathVariable int test_id,Principal principal){
         if (errors.hasErrors()) {
             return "Doctor/editsentrequests";
         }
@@ -121,10 +119,10 @@ public class DoctorController {
 //        int testId = labTest.getTest_id();
         List<Test> lab_requests = labTest.getLab_request();
 
-        LabTest labTestToBeSaved = labTestRepository.findByPatient_id(id);
+        LabTest labTestToBeSaved = labTestRepository.findByTest_id(test_id);
 
         labTestToBeSaved.setLab_request(lab_requests);
-        labTestToBeSaved.setPatient_id(id);
+        labTestToBeSaved.setPatient_id(labTestToBeSaved.getPatient_id());
         labTestToBeSaved.setDoctor_email(principal.getName());
 
         labTestRepository.save(labTestToBeSaved);

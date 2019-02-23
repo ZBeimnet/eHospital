@@ -41,4 +41,6 @@ public class Patient {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "patient_history_id")
     private PatientHistory patientHistory;
+
+    private String assignedDoctor;
 }
