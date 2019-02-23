@@ -38,56 +38,79 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" th:href="@{/doctor/home}">
               <i class="material-icons"></i>
               <p>View Patients</p>
             </a>
           </li>
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link" th:href="@{/doctor/sentrequests}">
               <i class="material-icons"></i>
               <p>View Lab Requests</p>
             </a>
           </li>
-            <li class="nav-item ">
+            <li class="nav-item">
                 <a class="nav-link" th:href="@{/doctor/labresults}">
                     <i class="material-icons"></i>
                     <p>View Lab Results</p>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" th:href="@{/doctor/patienthistory}">
                     <i class="material-icons"></i>
                     <p>View Patient History</p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a style="width: 90%;" class="btn btn-warning" th:href="@{/logout}">
-                    <p>Log out</p>
-                </a>
-            </li>
 
-
+          <li class="nav-item">
+            <a style="width: 90%;" class="btn btn-warning" th:href="@{/logout}">
+              <p>Log out</p>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
     <div class="main-panel">
       <div class="content">
-        <div class="row">
-          <div class="card col-sm-5 mr-1 ml-5" style="width:250px;" th:each="patient : ${patients}" th:if="${patient.getPatientHistory() == null}">
-              <img class="card-img-top img-fluid" style="height: 300px;" th:src="@{/images/card.png}" alt="Card image">
-              <div class="card-body">
-                  <h4 class="card-title"><span th:text="${patient.name}" class="h3 badge badge-light align-content-center"></span></h4>
-                  <p class="card-text"><span class="badge badge-secondary">Age:</span> <span th:text="${patient.age}"></span></p>
-                  <p class="card-text"><span class="badge badge-secondary">Gender:</span> <span th:text="${patient.gender}"></span></p>
-                  <p class="card-text"><span class="badge badge-secondary">Phone No:</span> <span th:text="${patient.phone_no}"></span></p>
-              </div>
-              <div class="card-footer">
-                  <a class="btn btn-primary" th:href="@{'/doctor/sendlabr/' + ${patient.id}}">Send Lab Request</a>
+          <div class="row">
+              <div class="card col-sm-5 mr-1 ml-5" style="width:250px;" th:each="labTest : ${labTests}" th:if="${patientNames.get(labTest.patient_id).getPatientHistory() != null}">
+                  <!--<img class="card-img-top img-fluid" style="height: 300px;" th:src="@{/images/card.png}" alt="Card image">-->
+                  <div class="card-body">
+                      <h4 class="card-title">Patient Name: <span th:text="${patientNames.get(labTest.patient_id).getName()}" class="h4 badge badge-secondary"></span></h4>
+                      <h4 class="card-title">Assigned Doctor: Dr. <span th:text="${doctor.getName()}" class="h4 badge badge-secondary"></span></h4>
+                      <h4 class="card-title">Laboratory Technician: <span th:text="${labTechNames.get(labTest.getTest_id())}" class="h4 badge badge-secondary"></span></h4>
+                      <h4 class="card-title">Examined Date:  <span th:text="${patientNames.get(labTest.patient_id).getPatientHistory().getHistorySavedDate()}" class="h4 badge badge-secondary"></span></h4>
+
+
+
+                      <div class="row">
+                          <div class="col-md-6">
+                              <h4><span style="alignment: center;" class="h4 badge badge-primary">Requested Tests   <i class="fa fa-arrow-down"></i></span></h4>
+                              <div class="card">
+                                  <ul class="list-group list-group-flush">
+                                      <li style="height: 60px; border-bottom: solid 1px grey;" class="list-group-item" th:each="test : ${labTest.getLab_request()}">
+                                          <span th:text="${test.getName()}"></span><i style="float: right;" class="fa fa-arrow-right"></i>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <h4><span style="alignment: center;" class="h4 badge badge-primary">Results   <i class="fa fa-arrow-down"></i></span></h4>
+                              <div class="card">
+                                  <ul th:if="${labResults.get(labTest.getTest_id()) != null}" class="list-group list-group-flush">
+                                      <li style="height: 60px; border-bottom: solid 1px grey;" class="list-group-item"  th:each="result : ${labResults.get(labTest.getTest_id()).getLab_result()}" th:text="${result.getResult()}"></li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+
+
+
+                  </div>
+
               </div>
           </div>
-        </div>
       </div>
     </div>
   </div>

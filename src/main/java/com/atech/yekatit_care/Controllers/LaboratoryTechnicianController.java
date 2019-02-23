@@ -47,6 +47,7 @@ public class LaboratoryTechnicianController {
         Iterable<LabTest> labTests = labTestRepository.findAll();
         HashMap<Integer, String> patientNames = new HashMap<>();
         HashMap<String, String> doctorNames = new HashMap<>();
+        HashMap<Integer, LabResult> labResults = new HashMap<>();
 
         for (LabTest labTest:
                 labTests) {
@@ -55,10 +56,15 @@ public class LaboratoryTechnicianController {
 
             User doctor = userService.findUserByEmail(labTest.getDoctor_email());
             doctorNames.put(labTest.getDoctor_email(), doctor.getName());
+
+            LabResult result = labResultRepository.findByTestRequest_id(labTest.getTest_id());
+
+            labResults.put(labTest.getTest_id(), result);
         }
 
         model.addAttribute("doctorNames", doctorNames);
         model.addAttribute("labTests", labTests);
+        model.addAttribute("labResults", labResults);
         model.addAttribute("patientNames", patientNames);
 
 

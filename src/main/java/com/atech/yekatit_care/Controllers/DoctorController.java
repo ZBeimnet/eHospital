@@ -1,14 +1,8 @@
 package com.atech.yekatit_care.Controllers;
 
 
-import com.atech.yekatit_care.Domains.LabTest;
-import com.atech.yekatit_care.Domains.Patient;
-import com.atech.yekatit_care.Domains.Test;
-import com.atech.yekatit_care.Domains.User;
-import com.atech.yekatit_care.Repositories.LabTestRepository;
-import com.atech.yekatit_care.Repositories.PatientRepository;
-import com.atech.yekatit_care.Repositories.TestRepository;
-import com.atech.yekatit_care.Repositories.UserRepository;
+import com.atech.yekatit_care.Domains.*;
+import com.atech.yekatit_care.Repositories.*;
 import com.atech.yekatit_care.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,13 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import sun.util.calendar.BaseCalendar;
 
 import javax.validation.Valid;
+import javax.xml.crypto.Data;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/doctor")
@@ -32,10 +25,16 @@ public class DoctorController {
     private PatientRepository patientRepository;
 
     @Autowired
+    private PatientHistoryRepository patientHistoryRepository;
+
+    @Autowired
     private TestRepository testRepository;
 
     @Autowired
     private LabTestRepository labTestRepository;
+
+    @Autowired
+    private LabResultRepository labResultRepository;
 
     @Autowired
     private UserService userService;
@@ -56,7 +55,8 @@ public class DoctorController {
 
         Iterable<LabTest> allLabTests = labTestRepository.findAll();
         List<LabTest> labTests = new ArrayList<>();
-        HashMap<Integer, String> patientNames = new HashMap<>();
+        HashMap<Integer, Patient> patientNames = new HashMap<>();
+        HashMap<Integer, LabResult> labResults = new HashMap<>();
         User doctor = userService.findUserByEmail(principal.getName());
 
         for (LabTest labTest:
@@ -64,23 +64,25 @@ public class DoctorController {
 
             if(labTest.getDoctor_email().equals(doctor.getEmail())) {
                 Patient patient = patientRepository.findById(labTest.getPatient_id());
-                patientNames.put(labTest.getPatient_id(), patient.getName());
+                patientNames.put(labTest.getPatient_id(), patient);
 
                 labTests.add(labTest);
+
+                LabResult result = labResultRepository.findByTestRequest_id(labTest.getTest_id());
+
+                labResults.put(labTest.getTest_id(), result);
+
             }
         }
 
         model.addAttribute("doctor", doctor);
         model.addAttribute("labTests", labTests);
+        model.addAttribute("labResults", labResults);
         model.addAttribute("patientNames", patientNames);
 
         return "Doctor/sentrequests";
     }
 
-    @GetMapping("/labresults")
-    public String labResults() {
-        return "Doctor/labresults";
-    }
 
     @GetMapping("/sendlabr/{id}")
     public String sendLabR(@PathVariable int id, Model model) {
@@ -151,4 +153,93 @@ public class DoctorController {
 
         return "redirect:/doctor/home";
     }
+
+    @GetMapping("/labresults")
+    public String labResults(Model model, Principal principal) {
+
+        Iterable<LabTest> allLabTests = labTestRepository.findAll();
+        List<LabTest> labTests = new ArrayList<>();
+//        List<LabResult> labResults = new ArrayList<>();
+        HashMap<Integer, Patient> patientNames = new HashMap<>();
+        HashMap<Integer, LabResult> labResults = new HashMap<>();
+        User doctor = userService.findUserByEmail(principal.getName());
+        for (LabTest labTest :
+                allLabTests) {
+
+            if (labTest.getDoctor_email().equals(doctor.getEmail())) {
+                Patient patient = patientRepository.findById(labTest.getPatient_id());
+                patientNames.put(labTest.getPatient_id(), patient);
+
+                labTests.add(labTest);
+
+                LabResult result = labResultRepository.findByTestRequest_id(labTest.getTest_id());
+
+                labResults.put(labTest.getTest_id(), result);
+            }
+        }
+
+        model.addAttribute("doctor", doctor);
+        model.addAttribute("labTests", labTests);
+        model.addAttribute("labResults", labResults);
+        model.addAttribute("patientNames", patientNames);
+
+        return "Doctor/labresults";
+    }
+
+    @GetMapping("/patienthistory")
+    public String patientHistory(Model model, Principal principal) {
+
+        Iterable<LabTest> allLabTests = labTestRepository.findAll();
+        List<LabTest> labTests = new ArrayList<>();
+//        List<LabResult> labResults = new ArrayList<>();
+        HashMap<Integer, Patient> patientNames = new HashMap<>();
+        HashMap<Integer, LabResult> labResults = new HashMap<>();
+        HashMap<Integer, String> laboratoryTechName = new HashMap<>();
+        User doctor = userService.findUserByEmail(principal.getName());
+        for (LabTest labTest :
+                allLabTests) {
+
+            if (labTest.getDoctor_email().equals(doctor.getEmail())) {
+                Patient patient = patientRepository.findById(labTest.getPatient_id());
+                if(patient.getPatientHistory() != null) {
+
+                    patientNames.put(labTest.getPatient_id(), patient);
+
+                    labTests.add(labTest);
+
+                    LabResult result = labResultRepository.findByTestRequest_id(labTest.getTest_id());
+
+                    labResults.put(labTest.getTest_id(), result);
+
+                    User labTech = userService.findUserByEmail(result.getLabTechnician_name());
+                    laboratoryTechName.put(labTest.getTest_id(), labTech.getName());
+                }
+
+            }
+        }
+
+        model.addAttribute("doctor", doctor);
+        model.addAttribute("labTests", labTests);
+        model.addAttribute("labResults", labResults);
+        model.addAttribute("patientNames", patientNames);
+        model.addAttribute("labTechNames", laboratoryTechName);
+
+        return "Doctor/patienthistory";
+    }
+
+    @PostMapping("/patienthistory/{patient_id}")
+    public String savePatienthistory(@PathVariable int patient_id) {
+        Patient patient = patientRepository.findById(patient_id);
+        PatientHistory patientHistory = new PatientHistory();
+
+        patient.setPatientHistory(patientHistory);
+        patientHistory.setPatient(patient);
+
+        patientRepository.save(patient);
+        patientHistoryRepository.save(patientHistory);
+
+        return "redirect:/doctor/patienthistory";
+
+    }
+
 }

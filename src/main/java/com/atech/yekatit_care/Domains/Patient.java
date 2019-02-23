@@ -21,7 +21,7 @@ public class Patient {
     private String name;
 
     @Column(name = "age")
-    @NotEmpty(message = "*Please provide your age")
+//    @NotEmpty(message = "*Please provide your age")
     private int age;
 
     @Column(name = "gender")
