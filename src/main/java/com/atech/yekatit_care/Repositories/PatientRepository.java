@@ -4,7 +4,16 @@ import com.atech.yekatit_care.Domains.Patient;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
+import java.util.List;
+
+@Repository("PatientRepository")
 public interface PatientRepository extends CrudRepository<Patient, Integer> {
     Patient findById(int id);
+    public List<Patient> findAllByOrderByName();
+    public  List<Patient> findAllByOrderById();
+    public List<Patient> findPatientsByOrderByName();
+    public void deletePatientById(int id);
+
+
+
 }

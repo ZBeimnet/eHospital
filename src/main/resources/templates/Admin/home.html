@@ -31,7 +31,7 @@
         Tip 2: you can also add an image using data-image tag
     -->
       <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+        <a href="#" class="simple-text logo-normal">
           YekatitCare <br/>
           Admin
         </a>
@@ -54,7 +54,7 @@
           <li class="nav-item ">
             <a class="nav-link" th:href="@{/admin/EmployeeProfile}">
               <i class="material-icons"></i>
-              <p>Register Employees</p>
+              <p>Employees' Profile</p>
             </a>
           </li>
             <li class="nav-item">
@@ -72,8 +72,6 @@
           <div class="navbar-wrapper">
             <li class="nav-item active  ">
               <a class="nav-link" href="home">
-                <i class="material-icons">dashboard</i>
-                <p>Dashboard</p>
               </a>
             </li>
           </div>
@@ -94,7 +92,7 @@
               <div class="card card-stats">
                 <div class="card-header card-header-warning card-header-icon">
                   <div class="card-icon">
-                    <i class="material-icons">content_copy</i>
+                    <i class="material-icons">Total Doctors</i>
                   </div>
                   <p class="card-category">Total Doctors</p>
                   <h3 class="card-title">2100
@@ -111,7 +109,7 @@
               <div class="card card-stats">
                 <div class="card-header card-header-success card-header-icon">
                   <div class="card-icon">
-                    <i class="material-icons">store</i>
+                    <i class="material-icons">Total Nurses</i>
                   </div>
                   <p class="card-category">Total Nurses</p>
                   <h3 class="card-title">3000</h3>
@@ -127,7 +125,7 @@
               <div class="card card-stats">
                 <div class="card-header card-header-danger card-header-icon">
                   <div class="card-icon">
-                    <i class="material-icons">info_outline</i>
+                    <i class="material-icons">Reports</i>
                   </div>
                   <p class="card-category">Reports</p>
                   <h3 class="card-title">0</h3>
@@ -143,7 +141,7 @@
               <div class="card card-stats">
                 <div class="card-header card-header-info card-header-icon">
                   <div class="card-icon">
-                    <i class="fa fa-twitter"></i>
+                    <i class="fa fa-twitter">Complains</i>
                   </div>
                   <p class="card-category">Complains</p>
                   <h3 class="card-title">+245</h3>
@@ -163,40 +161,19 @@
               <div class="card">
                 <div class="card-header card-header-warning">
                   <h4 class="card-title">Doctors' Stats</h4>
-                  <p class="card-category">New employees on date imported from database timestamp</p>
                 </div>
                 <div class="card-body table-responsive">
                   <table class="table table-hover">
                     <thead class="text-warning">
-                      <th>ID</th>
-                      <th>Name</th>
-                      <th>Salary</th>
-                      <th>Country</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Email</th>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Dr. Bethel Roger</td>
-                        <td>36,738ETB</td>
-                        <td>ETHIOPIA</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Dr. Beimnet Zewdu</td>
-                        <td>23,789 ETB</td>
-                        <td>ETHIOPIA</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>Beshir Dekebo</td>
-                        <td>56,142 ETB</td>
-                        <td>ETHIOPIA</td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>Amir Mustefa</td>
-                        <td>38,735 ETB</td>
-                        <td>Kenya</td>
+                      <tr th:each="doctor:${doctorList}">
+                        <td th:text="${doctor.name}">Dr.</td>
+                        <td th:text="${doctor.lastName}"></td>
+                        <td th:text="${doctor.email}"></td>
                       </tr>
                     </tbody>
                   </table>
@@ -215,23 +192,13 @@
           <nav class="float-left">
             <ul>
               <li>
-                <a href="https://www.creative-tim.com">
+                <a href="#">
                   YekatitCare
                 </a>
               </li>
               <li>
-                <a href="https://creative-tim.com/presentation">
+                <a href="#">
                   About Us
-                </a>
-              </li>
-              <li>
-                <a href="http://blog.creative-tim.com">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="https://www.creative-tim.com/license">
-                  Licenses
                 </a>
               </li>
             </ul>
@@ -241,7 +208,6 @@
             <script>
               document.write(new Date().getFullYear())
             </script>, made with <i class="material-icons">favorite</i> by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
           </div>
         </div>
       </footer>

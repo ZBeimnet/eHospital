@@ -28,8 +28,8 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
-        modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
+        modelAndView.addObject("doctorList", userService.getDoctors());
         modelAndView.setViewName("admin/home");
         return modelAndView;
     }
@@ -43,11 +43,10 @@ public class AdminController {
 
 
     @GetMapping("/EmployeeProfile/{id}")
-    public ModelAndView delete(@PathVariable int id){
-        ModelAndView modelAndView=new ModelAndView();
+    public String delete(@PathVariable int id){
         userService.deleteUser(id);
-        modelAndView.setViewName("admin/EmployeeProfile");
-        return modelAndView;
+        return "redirect:admin/EmployeeProfile";
+
     }
 
 

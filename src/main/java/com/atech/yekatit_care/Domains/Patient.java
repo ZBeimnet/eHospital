@@ -10,18 +10,14 @@ import java.sql.Date;
 @Entity
 @Table(name = "patient")
 public class Patient {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "patient_id")
     private int id;
-
     @Column(name = "name")
-    @NotEmpty(message = "*Please provide your name")
+    @NotEmpty(message = "*Please provide your last name")
     private String name;
-
     @Column(name = "age")
-    @NotEmpty(message = "*Please provide your age")
     private int age;
 
     @Column(name = "gender")
@@ -41,4 +37,6 @@ public class Patient {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "patient_history_id")
     private PatientHistory patientHistory;
+    @Column(name="assignedDoctor")
+    private String assignedDoctor;
 }

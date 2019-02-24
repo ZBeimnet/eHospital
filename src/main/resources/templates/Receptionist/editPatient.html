@@ -49,15 +49,15 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/admin/registration}">
+                <a class="nav-link" th:href="@{/receptionist/home}">
                     <i class="material-icons"></i>
-                    <p>Employees' Registration</p>
+                    <p>Home</p>
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" th:href="@{/admin/EmployeeProfile}">
+                <a class="nav-link" th:href="@{/receptionist/home}">
                     <i class="material-icons"></i>
-                    <p>Register Employees</p>
+                    <p>View Patient Record</p>
                 </a>
             </li>
             <li class="nav-item">
@@ -72,38 +72,23 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 ">
-            <form autocomplete="off" action="#" th:action="@{/admin/edit}"
-                  th:object="${user}" method="post"
+            <form autocomplete="off" action="#" th:action="@{/receptionist/editPatient}"
+                  th:object="${patient}" method="post"
                   role="form" class="form-horizontal">
                 <fieldset>
                     <!-- Form Name -->
-                    <legend>Edit User's Profile</legend>
-
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="Father">First name</label>
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-male" style="font-size: 20px;"></i>
-
-                                </div>
-                                <input id="Father" name="Father" th:field="*{name}"th:type="text" placeholder="First Name" class="form-control input-md">
-
-                            </div>
-
-                        </div>
-                    </div>
+                    <legend>Change Patient's Record</legend>
 
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="Mother"> Last Name</label>
+                        <label class="col-md-4 control-label" for="Mother"> Full Name</label>
                         <div class="col-md-4">
                             <div class="input-group">
                                 <div class="input-group-addon">
                                     <i class="fa fa-female" style="font-size: 20px;"></i>
 
                                 </div>
-                                <input id="Mother" th:field="*{lastname}" th:type="text" placeholder="Last Name" class="form-control input-md">
+                                <input id="Mother" name="Mother" th:field="*{name}" th:type="text" placeholder="Name" class="form-control input-md">
 
                             </div>
 
@@ -113,14 +98,14 @@
 
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="Primary Occupation">Occupation</label>
+                        <label class="col-md-4 control-label" for="Primary Occupation">Age</label>
                         <div class="col-md-4">
                             <div class="input-group">
                                 <div class="input-group-addon">
                                     <i class="fa fa-briefcase"></i>
 
                                 </div>
-                                <input id="Primary Occupation" th:field="*{selectedRole}" th:type="text" placeholder="Primary Occupation" class="form-control input-md">
+                                <input id="Primary Occupation" th:field="*{age}" name="Primary Occupation" th:type="number" placeholder="Primary Occupation" class="form-control input-md">
                             </div>
 
 
@@ -129,13 +114,52 @@
 
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="Email Address">Email Address</label>
+                        <label class="col-md-4 control-label" for="Email Address">Phone Number</label>
                         <div class="col-md-4">
                             <div class="input-group">
                                 <div class="input-group-addon">
                                     <i class="fa fa-envelope-o"></i>
                                 </div>
-                                <input id="Email Address" name="Email Address" th:field="*{email}" th:type="text" placeholder="Email Address" class="form-control input-md">
+                                <input id="phone" th:field="*{phone_no}"name="Email Address" th:type="phone" placeholder="Phone" class="form-control input-md">
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="Email Address">Address</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-envelope-o"></i>
+                                </div>
+                                <input id="Email Address" th:field="*{address}" name="address" th:type="number" placeholder="Phone" class="form-control input-md">
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="Email Address">Gender</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-envelope-o"></i>
+                                </div>
+                                <input id="gender" th:field="*{gender}" name="address" th:type="number" placeholder="Phone" class="form-control input-md">
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="Email Address">Date</label>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-envelope-o"></i>
+                                </div>
+                                <input id="date" th:field="*{date}" name="address" th:type="number" placeholder="Phone" class="form-control input-md">
 
                             </div>
 
@@ -144,7 +168,8 @@
 
                 </fieldset>
                 <span style="margin-left: 560px">
-                    <a href="#" th:href="@{'/admin/edit/' + ${user.id}}"  class="btn btn-danger">Update</a>
+                    <a href="#" th:href="@{'/receptionist/editPatient/' + ${patient.id}}"  class="btn btn-danger">Update</a>
+                    <a href="#" th:href="@{receptionist/home}" class="btn btn-primary">Back</a>
                 </span>
 
             </form>

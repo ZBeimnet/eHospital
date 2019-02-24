@@ -49,7 +49,6 @@ public class LaboratoryTechnicianController {
             User doctor = userService.findUserByEmail(labTest.getDoctor_email());
             doctorNames.put(labTest.getDoctor_email(), doctor.getName());
         }
-
         model.addAttribute("doctorNames", doctorNames);
         model.addAttribute("labTests", labTests);
         model.addAttribute("patientNames", patientNames);
