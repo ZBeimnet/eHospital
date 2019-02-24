@@ -41,11 +41,11 @@ public class Patient {
     @Size(min = 5,message = "*Please provide your address")
     private String address;
     @Column(name = "phone_no")
-    @NotNull(message = "*Please provide your phone")
+    @Size(min=10,message = "*Phone number must be 10 digits")
+
     private String phone_no;
 
     @Column(name = "date")
-    @DateTimeFormat
     private Date date;
 
     @OneToOne(cascade = CascadeType.ALL)
