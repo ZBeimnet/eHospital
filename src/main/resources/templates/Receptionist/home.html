@@ -15,7 +15,7 @@
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" th:href="@{https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons}" />
   <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css}">
-  <!-- CSS Files -->
+
   <link th:href="@{/css/material-dashboard.css}" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link rel="stylesheet" th:href="@{/demo/demo.css}" />
@@ -31,7 +31,7 @@
         Tip 2: you can also add an image using data-image tag
     -->
       <div class="logo">
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+        <a href="#" class="simple-text logo-normal">
             YekatitCare <br/>
             Receptionist
         </a>
@@ -39,8 +39,13 @@
       <div class="sidebar-wrapper">
         <ul class="nav">
           <li class="nav-item active">
-            <a class="nav-link" href="../registration.html">
-              <p>Send Patient Info</p>
+            <a class="nav-link" href="#">
+              <p>Home</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/receptionist/patientlist}">
+              <p>View Patients</p>
             </a>
           </li>
             <li class="nav-item">
@@ -61,45 +66,49 @@
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">patient Register</h4>
+                  <h4 class="card-title">Patient Register</h4>
                   <p class="card-category">Patient Registration</p>
                 </div>
                 <div class="card-body">
-                  <form method="post" class="form-horizontal"
-                        role="form">
+                  <form method="POST" class="form-horizontal"
+                        role="form" action="#" autocomplete="off"th:action="@{/receptionist/home}" th:object="${patient}">
                     <h4>Patient Registration Form</h4>
+                    <span style="color: #00cc00" th:utext="${successMessag}"></span>
                     <div class="form-group row">
                       <div class="col-sm-9">
-
-                        <input type="text"  placeholder="Name"
+                        <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"class="validation-message">
+                        </label>
+                        <input th:field="*{name}"type="text"placeholder="First Name"
                                class="form-control" />
                       </div>
                     </div>
+
                       <div class="form-group row">
                           <div class="col-sm-9">
-
-                              <input type="text"  placeholder="Age"
+                            <label class="validation-message" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></label>
+                              <input th:type="text" th:field="*{age}" placeholder="Age"
                                      class="form-control" />
                           </div>
                       </div>
                       <div class="form-group row">
                           <div class="col-sm-9">
-
-                              <input type="text"  placeholder="Address"
+                            <label class="validation-message" th:if="${#fields.hasErrors('address')}" th:errors="${address}"></label>
+                              <input th:type="text" th:field="*{address}" placeholder="Address"
                                      class="form-control" />
                           </div>
                       </div>
                       <div class="form-group row">
                           <div class="col-sm-9">
-
-                              <input type="text"  placeholder="Phone_no"
+                            <label class="validation-message" th:if="${#fields.hasErrors('phone_no')}" th:errors="${phone_no}"></label>
+                              <input type="text"  th:field="*{phone_no}"placeholder="Phone"
                                      class="form-control" />
                           </div>
                       </div>
                       <div class="form-group row">
                           <div class="col-sm-9">
+                            <label class="validation-message" th:if="${#fields.hasErrors('date')}" th:errors="${date}"></label>
 
-                              <input type="text"  placeholder="date"
+                              <input type="date"  th:field="*{date}" placeholder="date"
                                      class="form-control" />
                           </div>
                       </div>
@@ -109,23 +118,16 @@
 
                           </div>
                           <div class="col-sm-9">
-
-                              <input type="radio" name="gender" value="male"> Male<br>
-                              <input type="radio" name="gender" value="female"> Female<br>
-                              <input type="radio" name="gender" value="other"> Other
+                              <input th:field="*{gender}" type="radio" name="gender" th:value="'Male'"> Male<br>
+                              <input  th:field="*{gender}"type="radio" name="gender" th:value="'Female'"> Female<br>
+                              <input  th:field="*{gender}" type="radio" name="gender" th:value="'Other'"> Other
                           </div>
                       </div>
                           <div class="form-group row">
-                              <div class="col-sm-2">
-                                  <label class="col-form-label" for="selection">Avaliable Doctors</label>
-                              </div>
                               <div class="col-sm-9">
-                                  <select class="form-control" id="selection">
-                                      <option>Beki</option>
-                                      <option>amir</option>
-                                      <option>beti</option>
-                                      <option>amir</option>
-                                      <option>amir</option>
+                                  <select th:field="*{assignedDoctor}" class="form-control">
+                                    <option value="" style="color: #0a6ebd;">Assign Doctor</option>
+                                    <option th:each="doctor:${doctorList}"th:value="${doctor.name}" th:text="${doctor.name}"></option>
                                   </select>
                               </div>
                           </div>
@@ -133,19 +135,26 @@
 
                        <div class="form-group row">
                       <div class="col-sm-9">
-                        <button type="add patient" class="btn btn-primary btn-block">Add patient</button>
+                        <button type="submit" class="btn btn-primary btn-block">Add patient</button>
                       </div>
                     </div>
 
-
-
+                    <div class="col-sm-9">
+                      <a  href="#" th:href="@{/receptionist/patientlist}" class="btn btn-primary btn-block">View Patients</a>
+                    </div>
 
                   </form>
-                </div>
               </div>
             </div>
       </div>
     </div>
+
+      </div>
+    </div>
+
+  </div>
+  </div>
+  </div>
   </div>
     </div>
   </div>
@@ -209,7 +218,7 @@
         <li class="button-container github-star">
           <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ntkme/github-buttons on GitHub">Star</a>
         </li>
-        <li class="header-title">Thank you for 95 shares!</li>
+
         <li class="button-container text-center">
           <button id="twitter" class="btn btn-round btn-twitter"><i class="fa fa-twitter"></i> &middot; 45</button>
           <button id="facebook" class="btn btn-round btn-facebook"><i class="fa fa-facebook-f"></i> &middot; 50</button>

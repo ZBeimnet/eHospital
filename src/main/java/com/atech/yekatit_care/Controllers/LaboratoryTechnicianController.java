@@ -61,7 +61,6 @@ public class LaboratoryTechnicianController {
 
             labResults.put(labTest.getTest_id(), result);
         }
-
         model.addAttribute("doctorNames", doctorNames);
         model.addAttribute("labTests", labTests);
         model.addAttribute("labResults", labResults);

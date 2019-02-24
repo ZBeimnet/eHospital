@@ -41,9 +41,9 @@ public class DoctorController {
 
 
     @GetMapping("/home")
-    public String doctorHome(Model model) {
-
-        Iterable<Patient> allPatients = patientRepository.findAll();
+    public String doctorHome(Model model, Principal principal) {
+        User doctor = userService.findUserByEmail(principal.getName());
+        Iterable<Patient> allPatients = patientRepository.findByAssignedDoctor(doctor.getName());
 
         model.addAttribute("patients", allPatients);
 
