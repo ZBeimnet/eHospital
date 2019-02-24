@@ -9,6 +9,9 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 @Data
@@ -19,12 +22,14 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "patient_id")
     private int id;
+
     @Column(name = "name")
     @NotNull(message = "*Please provide your last name")
     @Size(min = 3, message="Name must be greater than 3 characters")
     private String name;
+
     @Column(name = "age")
-    @Size(min =1 , message="*Gender must be checked")
+    @Size(min =1 , message="*Age must be provided")
     private String age;
 
     @Column(name = "gender")
@@ -35,9 +40,7 @@ public class Patient {
     @Column(name = "address")
     @Size(min = 5,message = "*Please provide your address")
     private String address;
-
     @Column(name = "phone_no")
-    @Size(min = 10, message="*Phone must be be 10 digits")
     @NotNull(message = "*Please provide your phone")
     private String phone_no;
 

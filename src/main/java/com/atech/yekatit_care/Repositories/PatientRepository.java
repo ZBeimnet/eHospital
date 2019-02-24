@@ -12,4 +12,10 @@ public interface PatientRepository extends CrudRepository<Patient, Integer> {
     public List<Patient> findAllByOrderByName();
     public  List<Patient> findAllByOrderById();
     public List<Patient> findPatientsByOrderByName();
-    public void deletePatientById(int id);}
+    public void deletePatientById(int id);
+    List<Patient> findByAssignedDoctor(String doctor);
+
+
+
+}
+

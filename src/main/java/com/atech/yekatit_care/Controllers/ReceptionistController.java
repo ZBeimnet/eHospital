@@ -19,6 +19,7 @@ import java.util.Map;
 public class ReceptionistController {
     @Autowired
     PatientRepository patientRepository;
+
     @Autowired
     UserService userService;
 

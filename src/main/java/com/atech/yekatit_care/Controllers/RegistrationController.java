@@ -27,6 +27,7 @@ public class RegistrationController {
         modelAndView.setViewName("admin/registration");
         return modelAndView;
     }
+
     @PostMapping
     public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();

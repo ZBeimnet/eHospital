@@ -17,7 +17,8 @@ import javax.validation.Valid;
 public class PatientRegistrationController {
     @Autowired
     PatientRepository patientRepository;
-    @PostMapping()
+
+    @PostMapping
     public ModelAndView CreateNewPatient(@Valid Patient patient, BindingResult bindingResult){
         ModelAndView modelAndView=new ModelAndView();
         if(bindingResult.hasErrors()){
