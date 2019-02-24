@@ -22,7 +22,6 @@ public class AdminController {
 
     @Autowired
     private UserService userService;
-
     @GetMapping("/home")
     public ModelAndView home(){
         ModelAndView modelAndView = new ModelAndView();

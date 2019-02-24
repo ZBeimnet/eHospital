@@ -1,9 +1,14 @@
 package com.atech.yekatit_care.Domains;
 
 import lombok.Data;
+import org.hibernate.annotations.Check;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 
 @Data
@@ -15,32 +20,36 @@ public class Patient {
     @Column(name = "patient_id")
     private int id;
     @Column(name = "name")
-    @NotEmpty(message = "*Please provide your last name")
+    @NotNull(message = "*Please provide your last name")
+    @Size(min = 3, message="Name must be greater than 3 characters")
     private String name;
     @Column(name = "age")
-    private int age;
+    @Size(min =1 , message="*Gender must be checked")
+    private String age;
 
     @Column(name = "gender")
+    @NotNull(message = "Gender must be selected")
+    @Size(min =1 , message="*Gender must be selected")
     private String gender;
 
     @Column(name = "address")
-    @NotEmpty(message = "*Please provide your address")
+    @Size(min = 5,message = "*Please provide your address")
     private String address;
 
     @Column(name = "phone_no")
-    @NotEmpty(message = "*Please provide your phone_no")
+    @Size(min = 10, message="*Phone must be be 10 digits")
+    @NotNull(message = "*Please provide your phone")
     private String phone_no;
 
     @Column(name = "date")
+    @DateTimeFormat
     private Date date;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "patient_history_id")
     private PatientHistory patientHistory;
-<<<<<<< HEAD
     @Column(name="assignedDoctor")
-=======
-
->>>>>>> 4c35953cb42d658161ff62410f5d546421290056
+    @Size(min = 1, message="*A doctor must be assigned")
+    @NotNull(message = "*A doctor must be assigned")
     private String assignedDoctor;
 }

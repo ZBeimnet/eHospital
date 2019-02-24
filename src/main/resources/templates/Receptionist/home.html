@@ -76,45 +76,45 @@
                     <span style="color: #00cc00" th:utext="${successMessag}"></span>
                     <div class="form-group row">
                       <div class="col-sm-9">
-                        <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"class="validation-message">
+                        <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red" class="validation-message">
                         </label>
-                        <input th:field="*{name}"type="text"placeholder="First Name"
+                        <input th:field="*{name}"type="text"placeholder="Name"
                                class="form-control" />
                       </div>
                     </div>
 
                       <div class="form-group row">
                           <div class="col-sm-9">
-                            <label class="validation-message" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></label>
+                            <label class="validation-message" th:if="${#fields.hasErrors('age')}" style="color: red" th:errors="*{age}"></label>
                               <input th:type="text" th:field="*{age}" placeholder="Age"
                                      class="form-control" />
                           </div>
                       </div>
                       <div class="form-group row">
                           <div class="col-sm-9">
-                            <label class="validation-message" th:if="${#fields.hasErrors('address')}" th:errors="${address}"></label>
+                            <label class="validation-message" th:if="${#fields.hasErrors('address')}"  style="color: red"th:errors="*{address}"></label>
                               <input th:type="text" th:field="*{address}" placeholder="Address"
                                      class="form-control" />
                           </div>
                       </div>
                       <div class="form-group row">
                           <div class="col-sm-9">
-                            <label class="validation-message" th:if="${#fields.hasErrors('phone_no')}" th:errors="${phone_no}"></label>
+                            <label class="validation-message" th:if="${#fields.hasErrors('phone_no')}"  style="color: red"th:errors="*{phone_no}"></label>
                               <input type="text"  th:field="*{phone_no}"placeholder="Phone"
                                      class="form-control" />
                           </div>
                       </div>
                       <div class="form-group row">
                           <div class="col-sm-9">
-                            <label class="validation-message" th:if="${#fields.hasErrors('date')}" th:errors="${date}"></label>
+                            <label class="validation-message" th:if="${#fields.hasErrors('date')}" style="color: red" th:errors="*{date}"></label>
 
                               <input type="date"  th:field="*{date}" placeholder="date"
                                      class="form-control" />
                           </div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-sm-2">
-                              <label>Gender</label>
+                          <div class="col-sm-9">
+                            <label class="validation-message" th:if="${#fields.hasErrors('gender')}" style="color: red" th:errors="*{gender}"></label>
 
                           </div>
                           <div class="col-sm-9">
@@ -125,6 +125,7 @@
                       </div>
                           <div class="form-group row">
                               <div class="col-sm-9">
+                                <label class="validation-message" th:if="${#fields.hasErrors('assignedDoctor')}" style="color: red" th:errors="*{assignedDoctor}"></label>
                                   <select th:field="*{assignedDoctor}" class="form-control">
                                     <option value="" style="color: #0a6ebd;">Assign Doctor</option>
                                     <option th:each="doctor:${doctorList}"th:value="${doctor.name}" th:text="${doctor.name}"></option>

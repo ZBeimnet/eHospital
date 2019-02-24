@@ -22,7 +22,6 @@ public class ReceptionistController {
     @Autowired
     UserService userService;
 
-
     @GetMapping("/home")
     public ModelAndView Home(){
         ModelAndView modelAndView = new ModelAndView();
