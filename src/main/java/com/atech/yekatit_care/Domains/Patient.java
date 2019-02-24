@@ -37,6 +37,10 @@ public class Patient {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "patient_history_id")
     private PatientHistory patientHistory;
+<<<<<<< HEAD
     @Column(name="assignedDoctor")
+=======
+
+>>>>>>> 4c35953cb42d658161ff62410f5d546421290056
     private String assignedDoctor;
 }

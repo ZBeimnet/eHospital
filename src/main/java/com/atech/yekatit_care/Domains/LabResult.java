@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
 @Entity
@@ -16,12 +18,11 @@ public class LabResult {
     private int result_id;
 
     @Column(name = "testRequest_id")
-    private String testRequest_id;
+    private int testRequest_id;
 
     @Column(name = "labTechnician_name")
     private String labTechnician_name;
 
-    @Column(name = "lab_result")
-    @NotEmpty(message = "*Please provide your lab results")
-    private String lab_result;
+    @ManyToMany(targetEntity=Result.class)
+    private List<Result> lab_result;
 }

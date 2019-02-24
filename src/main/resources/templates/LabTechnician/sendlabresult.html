@@ -13,11 +13,13 @@
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
-
+  <link rel="stylesheet" type="text/css" th:href="@{https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons}" />
   <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}">
   <!-- CSS Files -->
   <link th:href="@{/css/material-dashboard.css}" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link th:href="@{/css/build.css}" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
   <link rel="stylesheet" th:href="@{/demo/demo.css}" />
 </head>
 
@@ -38,19 +40,19 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" th:href="@{/doctor/home}">
               <i class="material-icons"></i>
               <p>View Patients</p>
             </a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item ">
             <a class="nav-link" th:href="@{/doctor/sentrequests}">
               <i class="material-icons"></i>
-              <p>View Lab Requests</p>
+              <p>View Sent Lab Requests</p>
             </a>
           </li>
-            <li class="nav-item">
+            <li class="nav-item ">
                 <a class="nav-link" th:href="@{/doctor/labresults}">
                     <i class="material-icons"></i>
                     <p>View Lab Results</p>
@@ -66,29 +68,46 @@
       </div>
     </div>
     <div class="main-panel">
+
       <div class="content">
-
-          <div class="row">
-              <div class="card col-sm-5 mr-1 ml-5" style="width:250px;" th:each="labTest : ${labTests}">
-                  <!--<img class="card-img-top img-fluid" style="height: 300px;" th:src="@{/images/card.png}" alt="Card image">-->
-                  <div class="card-body">
-                      <h4 class="card-title">Patient Name: <span th:text="${patientNames.get(labTest.patient_id)}" class="h4 badge badge-secondary"></span></h4>
-                      <h4 class="card-title">Assigned Doctor: Dr. <span th:text="${doctor.getName()}" class="h4 badge badge-secondary"></span></h4>
-                      <h4><span style="alignment: center;" class="h4 badge badge-primary">Requested Lab Tests   <i class="fa fa-arrow-down"></i></span></h4>
-
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-md-8">
                       <div class="card">
-                          <ul class="list-group list-group-flush">
-                              <li class="list-group-item" th:each="test : ${labTest.getLab_request()}" th:text="${test.getName()}"></li>
-                          </ul>
-                      </div>
+                          <div class="card-header card-header-primary">
+                              <h4 class="card-title">Lab Result Form</h4>
+                              <p class="card-category">Please Fill Lab Results</p>
+                          </div>
+                          <div class="card-body">
 
-                  </div>
-                  <div class="card-footer">
-                      <a class="btn btn-primary"  th:href="@{'/doctor/sentrequests/edit/' + ${labTest.patient_id} + '/' + ${labTest.test_id}}">Edit Lab Request</a>
+                              <form autocomplete="off" action="#" th:action="@{'/laboratory/sendlabresult/' + ${testRequestId}}"
+                                    th:object="${result}" method="post" class="form-horizontal"
+                                    role="form">
+                                  <h2>Lab Results</h2>
+                                  <!--<span class="text-danger"-->
+                                        <!--th:if="${#fields.hasErrors('lab_result')}"-->
+                                        <!--th:errors="*{lab_result}">Lab Request Error</span>-->
+
+                                  <div th:each="test: ${testRequests}">
+                                      <!--<label th:for="${test.id}"><span class="h3"><strong th:text="${test.name}"></strong></span></label>-->
+                                      <input class="form-control" th:placeholder="${test.name}" name="results" type="text" th:id="${test.id}" >
+                                  </div>
+
+                                  <div class="form-group">
+                                      <div class="col-sm-9">
+                                          <button type="submit" class="btn btn-primary btn-block">Send Lab Result</button>
+                                      </div>
+                                  </div>
+
+                                  <!--<span th:utext="${successMessage}"></span>-->
+
+                              </form>
+
+                          </div>
+                      </div>
                   </div>
               </div>
           </div>
-
       </div>
     </div>
   </div>
@@ -161,7 +180,9 @@
     </div>
   </div>
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+
+    <script src="../assets/js/core/jquery.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
@@ -381,6 +402,22 @@
 
     });
   </script>
+    <script>
+
+
+            // $("[type=checkbox]").change(function() {
+            //
+            //     var msg = "";
+            //
+            //     $('input:checked').each(function(i,v){
+            //         msg += $(v).val() + " , ";
+            //     });
+
+
+
+            // });
+
+    </script>
 </body>
 
 </html>
