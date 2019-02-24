@@ -48,7 +48,6 @@ public class Patient {
     @Column(name = "date")
     private Date date;
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "patient_history_id")
     private PatientHistory patientHistory;
