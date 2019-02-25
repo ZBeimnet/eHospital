@@ -97,7 +97,7 @@ public class DoctorController {
         return "Doctor/sendlabr";
     }
 
-    @GetMapping("/sentrequests/edit/{id}/{test_id}")
+    @PutMapping("/sentrequests/edit/{id}/{test_id}")
     public String editLabRequest(@PathVariable int id, @PathVariable int test_id, Model model) {
 
         Patient patient = patientRepository.findById(id);

@@ -41,13 +41,12 @@ public class AdminController {
     }
 
 
-    @GetMapping("/EmployeeProfile/{id}")
+    @DeleteMapping("/EmployeeProfile/{id}")
     public String delete(@PathVariable int id){
         userService.deleteUser(id);
-        return "redirect:admin/EmployeeProfile";
+        return "redirect:/admin/EmployeeProfile";
 
     }
-
 
     }
 

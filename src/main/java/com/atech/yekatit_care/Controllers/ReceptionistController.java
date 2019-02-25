@@ -1,15 +1,16 @@
 package com.atech.yekatit_care.Controllers;
 
 
+import com.atech.yekatit_care.Domains.LabResult;
+import com.atech.yekatit_care.Domains.LabTest;
 import com.atech.yekatit_care.Domains.Patient;
+import com.atech.yekatit_care.Repositories.LabResultRepository;
+import com.atech.yekatit_care.Repositories.LabTestRepository;
 import com.atech.yekatit_care.Repositories.PatientRepository;
 import com.atech.yekatit_care.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
@@ -19,6 +20,12 @@ import java.util.Map;
 public class ReceptionistController {
     @Autowired
     PatientRepository patientRepository;
+
+    @Autowired
+    LabTestRepository labTestRepository;
+
+    @Autowired
+    LabResultRepository labResultRepository;
 
     @Autowired
     UserService userService;
@@ -36,7 +43,7 @@ public class ReceptionistController {
         map.put("patients", patientRepository.findPatientsByOrderByName());
         return "Receptionist/patientlist";
     }
-    @GetMapping("/editPatient")
+    @PutMapping("/editPatient")
         public String EditPage(){
         return "redirect:/editPatient";
         }
@@ -47,10 +54,21 @@ public class ReceptionistController {
         patientRepository.save(patient);
         return "redirect:/editPatient";
     }
-    @GetMapping("/patientlist/{id}")
+    @DeleteMapping("/patientlist/{id}")
     public String deletePatient(@PathVariable int id){
         patientRepository.deleteById(id);
-        return "redirect:/patientlist";
+
+        LabTest labTest = labTestRepository.findByPatient_id(id);
+        if(labTest != null) {
+            labTestRepository.delete(labTest);
+        }
+
+        LabResult labResult = labResultRepository.findByTestRequest_id(labTest.getTest_id());
+        if(labResult != null) {
+            labResultRepository.delete(labResult);
+        }
+
+        return "redirect:/receptionist/patientlist";
     }
 
 
