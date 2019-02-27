@@ -120,7 +120,12 @@
                           <td th:text="${user.selectedRole}">
                           </td>
                           <td>
-                              <a href="#" th:href="@{'/admin/EmployeeProfile/' + ${user.id}}"  class="btn btn-danger">Delete</a>
+                              <form autocomplete="off" action="#" th:action="@{'/admin/EmployeeProfile/' + ${user.id}}"
+                                    th:method="DELETE" class="form-horizontal"
+                                    role="form">
+                                  <input name="_method" type="hidden" value="DELETE" />
+                                  <button type="submit"  class="btn btn-danger">Delete</button>
+                              </form>
                           </td>
                           <!--<td>-->
                             <!--<a  th:href="@{/admin/edit/}" class="btn btn-info">Edit</a>-->

@@ -86,8 +86,9 @@
                                         </div>
                                         <div class="card-body">
                                             <form autocomplete="off" action="#" th:action="@{'/doctor/sentrequests/edit/' + ${test_id}}"
-                                                  th:object="${labTest}" method="post" class="form-horizontal"
+                                                  th:object="${labTest}" th:method="PUT" class="form-horizontal"
                                                   role="form">
+                                                <input name="_method" type="hidden" value="PUT" />
                                   <span class="text-danger"
                                         th:if="${#fields.hasErrors('lab_request')}"
                                         th:errors="*{lab_request}">Lab Request Error</span>

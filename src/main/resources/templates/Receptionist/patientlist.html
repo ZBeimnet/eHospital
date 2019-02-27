@@ -62,8 +62,12 @@
                     <p class="card-text"><span class="badge badge-secondary">Gender:</span> <span th:text="${patient.gender}"></span></p>
                     <p class="card-text"><span class="badge badge-secondary">Phone No:</span> <span th:text="${patient.phone_no}"></span></p>
                         <!--<a href="#" th:href="@{/receptionist/editPatient}"  class="btn btn-info">Edit</a>-->
-                        <a href="#" th:href="@{'/receptionist/patientlist/' + ${patient.id}}"  class="btn btn-danger">Delete</a>
-
+                    <form autocomplete="off" action="#" th:action="@{'/receptionist/patientlist/' + ${patient.id}}"
+                           th:method="DELETE" class="form-horizontal"
+                          role="form">
+                        <input name="_method" type="hidden" value="DELETE" />
+                        <button type="submit"  class="btn btn-danger">Delete</button>
+                    </form>
                     </div>
             </div>
         </div>

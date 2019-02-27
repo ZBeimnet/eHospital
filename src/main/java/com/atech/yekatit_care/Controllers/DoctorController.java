@@ -97,7 +97,7 @@ public class DoctorController {
         return "Doctor/sendlabr";
     }
 
-    @PutMapping("/sentrequests/edit/{id}/{test_id}")
+    @GetMapping("/sentrequests/edit/{id}/{test_id}")
     public String editLabRequest(@PathVariable int id, @PathVariable int test_id, Model model) {
 
         Patient patient = patientRepository.findById(id);
@@ -111,7 +111,7 @@ public class DoctorController {
         return "Doctor/editsentrequests";
     }
 
-    @PostMapping("/sentrequests/edit/{test_id}")
+    @PutMapping("/sentrequests/edit/{test_id}")
     public String processEditedLapReqest(@Valid LabTest labTest, Errors errors, @PathVariable int test_id,Principal principal){
         if (errors.hasErrors()) {
             return "Doctor/editsentrequests";
