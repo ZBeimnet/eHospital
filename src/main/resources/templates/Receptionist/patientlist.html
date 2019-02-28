@@ -51,6 +51,7 @@
         </ul>
     </div>
 </div>
+
 <div class="main-panel">
     <div class="content">
         <div class="row">
@@ -61,17 +62,47 @@
                     <p class="card-text"><span class="badge badge-secondary">Age:</span> <span th:text="${patient.age}"></span></p>
                     <p class="card-text"><span class="badge badge-secondary">Gender:</span> <span th:text="${patient.gender}"></span></p>
                     <p class="card-text"><span class="badge badge-secondary">Phone No:</span> <span th:text="${patient.phone_no}"></span></p>
-                        <!--<a href="#" th:href="@{/receptionist/editPatient}"  class="btn btn-info">Edit</a>-->
-                    <form autocomplete="off" action="#" th:action="@{'/receptionist/patientlist/' + ${patient.id}}"
-                           th:method="DELETE" class="form-horizontal"
-                          role="form">
-                        <input name="_method" type="hidden" value="DELETE" />
-                        <button type="submit"  class="btn btn-danger">Delete</button>
-                    </form>
+                    <a href="#" th:href="@{'/receptionist/editPatient/' + ${patient.id}}"  class="btn btn-info">Edit</a>
+                    <div id="deleteModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog" role="content">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Are you sure?</h4>
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form autocomplete="off" action="#" th:action="@{'/receptionist/patientlist/' + ${patient.id}}"
+                                          th:method="DELETE" class="form-horizontal"
+                                          role="form">
+                                        <input name="_method" type="hidden" value="DELETE" />
+
+                                        <div class="form-row">
+                                            <button type="button" class="btn btn-secondary btn-sm ml-auto" data-dismiss="modal">Cancel</button>
+                                            <button type="submit"  class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <button  class="btn btn-danger deleteLink">Delete</button>
+                    </div>
+            </div>
             </div>
         </div>
     </div>
 </div>
 </body>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/popper.min.js}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+    <script>
+        $(document).ready(function() {
+            $("button.deleteLink").click(function() {
+                $('#deleteModal').modal('show');
+            });
+        })
+    </script>
 </html>

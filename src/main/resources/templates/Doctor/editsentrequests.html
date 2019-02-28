@@ -89,13 +89,13 @@
                                                   th:object="${labTest}" th:method="PUT" class="form-horizontal"
                                                   role="form">
                                                 <input name="_method" type="hidden" value="PUT" />
-                                  <span class="text-danger"
-                                        th:if="${#fields.hasErrors('lab_request')}"
-                                        th:errors="*{lab_request}">Lab Request Error</span>
+                                                <label style="color: red;" th:if="${#fields.hasErrors('lab_request')}" th:errors="*{lab_request}"
+                                                       class="validation-message"></label>
                                                 <h2>Name: <span th:text="${patient.name}"></span> , Age: <span th:text="${patient.age}"></span> , Gender: <span th:text="${patient.gender}"></span></h2>
 
                                                 <div class="checkbox checkbox-success" th:each="test: ${tests}">
-                                                    <input name="lab_request" type="checkbox" th:value="${test.id}" th:id="${test.id}" >
+                                                    <input name="lab_request" type="checkbox" th:if="${selectedTests.contains(test)}" th:value="${test.id}" th:id="${test.id}" checked>
+                                                    <input name="lab_request" type="checkbox" th:unless="${selectedTests.contains(test)}" th:value="${test.id}" th:id="${test.id}" >
                                                     <label th:for="${test.id}"><span class="h3"><strong th:text="${test.name}"></strong></span></label>
                                                 </div>
                                                 <!--<input name="patient_id" type="hidden" th:field="*{patient_id}" th:value="${patient.id}"  >-->

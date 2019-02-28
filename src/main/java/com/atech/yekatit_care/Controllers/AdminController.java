@@ -40,6 +40,37 @@ public class AdminController {
         return "admin/EmployeeProfile";
     }
 
+    @GetMapping("/edit/{email}")
+    public String editPage(@PathVariable String email, Model model){
+        User user = userService.findUserByEmail(email);
+
+        model.addAttribute("user", user);
+
+        return "Admin/editUser";
+    }
+
+    @PutMapping("/edit/{email}")
+    public String editUser(@PathVariable String email, @Valid User user,  BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "Admin/editUser";
+        }
+        else {
+            User userToBeSaved = userService.findUserByEmail(email);
+
+            userToBeSaved.setName(user.getName());
+            userToBeSaved.setLastName(user.getLastName());
+            userToBeSaved.setEmail(user.getEmail());
+            userToBeSaved.setSelectedRole(user.getSelectedRole());
+            userToBeSaved.setPassword(user.getPassword());
+
+            userService.saveUser(userToBeSaved, user.getSelectedRole());
+
+            model.addAttribute("successMessage", "User has been updated successfully");
+
+            return "Admin/editUser";
+        }
+
+    }
 
     @DeleteMapping("/EmployeeProfile/{id}")
     public String delete(@PathVariable int id){

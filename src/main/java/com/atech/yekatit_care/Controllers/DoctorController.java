@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import sun.util.calendar.BaseCalendar;
@@ -102,9 +103,11 @@ public class DoctorController {
 
         Patient patient = patientRepository.findById(id);
         Iterable<Test> tests = testRepository.findAll();
+        List<Test> selectedTests = labTestRepository.findByTest_id(test_id).getLab_request();
 
         model.addAttribute("tests", tests);
         model.addAttribute("patient", patient);
+        model.addAttribute("selectedTests",selectedTests);
         model.addAttribute("labTest", new LabTest());
         model.addAttribute("test_id", test_id);
 
@@ -112,8 +115,8 @@ public class DoctorController {
     }
 
     @PutMapping("/sentrequests/edit/{test_id}")
-    public String processEditedLapReqest(@Valid LabTest labTest, Errors errors, @PathVariable int test_id,Principal principal){
-        if (errors.hasErrors()) {
+    public String processEditedLapReqest(@Valid LabTest labTest, @PathVariable int test_id, Principal principal, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
             return "Doctor/editsentrequests";
         }
 
