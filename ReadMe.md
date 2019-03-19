@@ -7,7 +7,4 @@
 1. >>Email: admin@gmail.com 
    >>Password:admin
 
-****Remarks!*****
-
-If you have seen a commit by a user who goes by the name "Dawit Negussie", please consider it as Bethel's commit. 
-Dawit Negussie is the username of Bethel's email address.
+This is a hospital managment project using spring framework
